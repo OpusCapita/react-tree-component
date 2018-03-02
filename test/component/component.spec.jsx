@@ -3,11 +3,11 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import Example from '../../src/index';
+import OCTreeView from '../../src/index';
 
-describe('Example component', () => {
+describe('OCTreeView component', () => {
   it('is rendered', () => {
-    const wrapper = mount(<Example />);
+    const wrapper = mount(<OCTreeView />);
     expect(wrapper).to.exist;
   });
 });

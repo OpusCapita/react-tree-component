@@ -1,3 +1,3 @@
-import Example from './example.component';
+import OCTreeView from './tree.component';
 
-export default Example;
+export default OCTreeView;

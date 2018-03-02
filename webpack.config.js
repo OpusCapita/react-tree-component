@@ -6,7 +6,7 @@ const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const flexbugs = require('postcss-flexbugs-fixes');
 
-const libraryName = 'react-component-template';
+const libraryName = 'react-treeview';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -133,6 +133,13 @@ const baseConfig = {
       commonjs: 'react-dom',
       amd: 'react-dom',
       umd: 'react-dom',
+    },
+    'rc-tree': {
+      root: 'Tree',
+      commonjs2: 'rc-tree',
+      commonjs: 'rc-tree',
+      amd: 'rc-tree',
+      umd: 'rc-tree',
     },
   },
 };

@@ -3,8 +3,9 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import ExampleContainer from './containers/example.container';
-
+// require('font-awesome-sass-loader');
 import './app.component.scss';
+import './columns.scss';
 import './images/favicon.ico';
 
 const renderApp = (Component) => {

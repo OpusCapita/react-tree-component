@@ -1,15 +1,56 @@
 import React from 'react';
-import Example from '../../src/index';
+import BaseTree from './base-tree.component';
+import {
+  PlainTreeConfig,
+  NoSelectConfig,
+  ChevronConfig,
+  ArrowConfig,
+  AllTrueWithChevronConfig,
+  AllTrueDefaultConfig,
+  NoIconDefaultConfig,
+  CaretConfig,
+  DefaultSelectedKeysConfig,
+} from './constants';
+
+import './example-component.scss';
 
 export default class ComponentView extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
   render() {
+
     return (
-      <Example />
+      <div id="oc-react-tree-container" className="oc-columns">
+        <div id="columns-container" className="oc-columns-container">
+          <div id="plain-tree-view" className="oc-columns-item-container">
+            <BaseTree {...PlainTreeConfig} />
+          </div>
+          <div id="noselectable-tree-view" className="oc-columns-item-container">
+            <BaseTree {...NoSelectConfig} />
+          </div>
+          <div id="chevron-tree-view" className="oc-columns-item-container">
+            <BaseTree {...ChevronConfig} />
+          </div>
+          <div id="arrow-tree-view" className="oc-columns-item-container">
+            <BaseTree {...ArrowConfig} />
+          </div>
+          <div id="chevron-all-true-tree-view" className="oc-columns-item-container">
+            <BaseTree {...AllTrueWithChevronConfig} />
+          </div>
+          <div id="all-true-tree-view" className="oc-columns-item-container">
+            <BaseTree {...AllTrueDefaultConfig} />
+          </div>
+          <div id="no-icon-tree-view" className="oc-columns-item-container">
+            <BaseTree {...NoIconDefaultConfig} />
+          </div>
+
+          <div id="caret-tree-view" className="oc-columns-item-container">
+            <BaseTree {...CaretConfig} />
+          </div>
+          <div id="defaultselected-tree-view" className="oc-columns-item-container">
+            <BaseTree {...DefaultSelectedKeysConfig} />
+          </div>
+        </div>
+      </div>
     );
   }
 }
