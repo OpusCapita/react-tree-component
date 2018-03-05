@@ -40,6 +40,7 @@ export const PlainTreeConfig = {
     checkable: 'true',
     selectable: 'true',
     defaultExpandAll: 'true',
+    disableCheckbox: 'false',
   },
 };
 
@@ -52,6 +53,7 @@ export const NoSelectConfig = {
     checkable: 'true',
     selectable: 'false',
     defaultExpandAll: 'true',
+    disableCheckbox: 'false',
   },
 };
 
@@ -66,7 +68,8 @@ export const ChevronConfig = {
     defaultExpandAll: 'false',
     showLine: 'false',
     showIcon: 'false',
-    iconClass: 'chevron'
+    iconClass: 'chevron',
+    disableCheckbox: 'false',
   },
 };
 
@@ -81,7 +84,8 @@ export const ArrowConfig = {
     defaultExpandAll: 'false',
     showLine: 'false',
     showIcon: 'false',
-    iconClass: 'arrow'
+    iconClass: 'arrow',
+    disableCheckbox: 'false',
   },
 };
 
@@ -95,6 +99,7 @@ export const CaretConfig = {
     selectable: 'false',
     defaultExpandAll: 'true',
     iconClass: 'carets',
+    disableCheckbox: 'false',
   },
 };
 
@@ -109,7 +114,8 @@ export const AllTrueWithChevronConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'true',
-    iconClass: 'chevron'
+    iconClass: 'chevron',
+    disableCheckbox: 'false',
   },
 };
 
@@ -124,6 +130,7 @@ export const AllTrueDefaultConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'true',
+    disableCheckbox: 'false',
   },
 };
 
@@ -138,6 +145,7 @@ export const NoIconDefaultConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'false',
+    disableCheckbox: 'false',
   },
 };
 
@@ -152,8 +160,31 @@ export const DefaultSelectedKeysConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'false',
+    disableCheckbox: 'false',
     defaultCheckedKeys: [
       'item1.2', 'item1.3.1',
     ],
+  },
+};
+
+function getData() {
+  return [require('../mockdata/perms.json')];
+}
+
+export const CustomLookUpConfig = {
+  description: 'TreeView.',
+  headerText: 'TreeView with custom dataLookUpKey, dataLookUpValue, dataLookUpChildren',
+  treeData: getData(),
+  tree: {
+    treeId: 'CustomLookUpExample',
+    checkable: 'true',
+    selectable: 'false',
+    defaultExpandAll: 'false',
+    showLine: 'true',
+    showIcon: 'false',
+    dataLookUpKey: 'permissionId',
+    dataLookUpValue: 'name',
+    dataLookUpChildren: 'subRights',
+    disableCheckbox: 'true',
   },
 };

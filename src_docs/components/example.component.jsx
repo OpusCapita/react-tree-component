@@ -10,6 +10,7 @@ import {
   NoIconDefaultConfig,
   CaretConfig,
   DefaultSelectedKeysConfig,
+  CustomLookUpConfig,
 } from './constants';
 
 import './example-component.scss';
@@ -48,6 +49,9 @@ export default class ComponentView extends React.PureComponent {
           </div>
           <div id="defaultselected-tree-view" className="oc-columns-item-container">
             <BaseTree {...DefaultSelectedKeysConfig} />
+          </div>
+          <div id="defaultselected-tree-view" className="oc-columns-item-container">
+            <BaseTree {...CustomLookUpConfig} />
           </div>
         </div>
       </div>

@@ -22,6 +22,8 @@ export default class OCTreeView extends React.PureComponent {
     checkable: PropTypes.bool,
     selectable: PropTypes.bool,
     defaultExpandAll: PropTypes.bool,
+    // Node related props:
+    disableCheckboxes: PropTypes.bool,
     // Customisation -- define the data lookUpKeys and lookUpValues
     treeData: PropTypes.arrayOf(PropTypes.object),
     dataLookUpKey: PropTypes.string.isRequired,
@@ -43,6 +45,8 @@ export default class OCTreeView extends React.PureComponent {
     checkable: false,
     selectable: false,
     defaultExpandAll: false,
+    // Node related props:
+    disableCheckboxes: false,
     // Customs
     dataLookUpKey: 'key',
     dataLookUpValue: 'parent',
@@ -51,7 +55,7 @@ export default class OCTreeView extends React.PureComponent {
   };
 
   /* hasChildrens - function */
-  hasChildrens(dataObject) {
+  hasChildrens = (dataObject) => {
     return (dataObject[this.props.dataLookUpChildren]
       && dataObject[this.props.dataLookUpChildren].length >= 1
     );
@@ -62,7 +66,8 @@ export default class OCTreeView extends React.PureComponent {
     const nodeKey = this.props.dataLookUpKey;
     const nodeVal = this.props.dataLookUpValue;
     const nodeChild = this.props.dataLookUpChildren;
-    const checkChilds = this.hasChildrens.bind(this);
+    const disableNodeCheckboxes = this.props.disableCheckboxes;
+    const checkChilds = this.hasChildrens;
     const customIcon = this.props.iconClass;
     // Recursive function for collecting nodes:
     const mountNodes = function (nlist) {
@@ -74,10 +79,16 @@ export default class OCTreeView extends React.PureComponent {
               title={node[nodeVal]}
               key={node[nodeKey]}
               className={customIcon}
+              disableCheckbox={disableNodeCheckboxes}
             />);
         } else {
           lst.push(
-            <TreeNode title={node[nodeVal]} key={node[nodeKey]} className={customIcon}>
+            <TreeNode
+              title={node[nodeVal]}
+              key={node[nodeKey]}
+              className={customIcon}
+              disableCheckbox={disableNodeCheckboxes}
+            >
               { mountNodes(node[nodeChild]) }
             </TreeNode>,
           );
