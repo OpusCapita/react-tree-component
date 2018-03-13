@@ -1,15 +1,16 @@
-# react-component-template
+# react-tree-component
 
 ### Description
-Describe the component here
+React Tree Component for showing simple hiearchy structures on the UI. Component is based on rc-tree (https://github.com/react-component/tree) component.
+
 
 ### Installation
 ```
-npm install @opuscapita/react-component-template
+npm install @opuscapita/react-tree-component
 ```
 
 ### Demo
-View the [DEMO](https://opuscapita.github.io/react-component-template)
+View the [DEMO](https://opuscapita.github.io/react-tree-component)
 
 ### Builds
 #### UMD
@@ -23,19 +24,111 @@ Also you need to configure sass loader, since all the styles are in sass format.
 ### API
 | Prop name                | Type             | Default                                  | Description                              |
 | ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
-| propName                 | string           |                                          | Describe the prop here                   |
+| treeId                   | string           |  defaultTree                             | Tree identifier                          |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| treeClass                | string           |  ''                                      | Tree container custom class for styling  |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| iconClass                | string           |  ''                                      | FontAwesome content based indicators:    |
+|                          |                  |                                          | 'chevron' - nodes as chevrons            |
+|                          |                  |                                          | :fa-chevron-right: :fa-chevron-down:     |
+|                          |                  |                                          | 'carets'  - nodes as carets              |
+|                          |                  |                                          | :fa-caret-right: :fa-caret-down:         |
+|                          |                  |                                          | 'arrow'   - nodes as arrows              |
+|                          |                  |                                          | :fa-arrow-right: :fa-arrow-down:         |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| defaultExpandedKeys      | Array            |  []                                      | Array of item ids to expand by default   |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| defaultSelectedKeys      | Array            |  []                                      | Array of item ids selected by default    |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| defaultCheckedKeys       | Array            |  []                                      | Array of item ids checked by default     |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| onExpand                 | Function         |  () => {}                                | Handling the node expand.                |
+|                          |                  |                                          | Takes 'expandedKeys' as parameter        |
+|                          |                  |                                          | ```jsx onExpand(expKeys) {           ``` |
+|                          |                  |                                          | ``` console.log(expKeys, arguments); ``` |
+|                          |                  |                                          | ``` }                                ``` |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| onSelect                 | Function         |  () => {}                                | Handling the item select.                |
+|                          |                  |                                          | Takes 'selectedKeys' as parameter        |
+|                          |                  |                                          | Takes 'info' (event object to get node)  |
+|                          |                  |                                          | ```jsx onSelect(selKeys, info) {     ``` |
+|                          |                  |                                          | ``` console.log(selKeys, info);      ``` |
+|                          |                  |                                          | ``` }                                ``` |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| onCheck                  | Function         |  () => {}                                | Handling the item checked                |
+|                          |                  |                                          | Takes 'checkedKeys' as parameter         |
+|                          |                  |                                          | Takes 'info' (event object to get node)  |
+|                          |                  |                                          | ```jsx onCheck (chkKeys, info) {     ``` |
+|                          |                  |                                          | ``` console.log(chkKeys, info);      ``` |
+|                          |                  |                                          | ``` }                                ``` |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| showLine                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| checkable                | Boolean          |  false                                   | Whether show or hide checkboxes from tree|
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| selectable               | Boolean          |  false                                   | Whether item can be selected.            |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| defaultExpandAll         | Boolean          |  false                                   | Expand all nodes by default.             |
+|                          |                  |                                          | Note! For better performance do not      |
+|                          |                  |                                          | enable this for large dataSets.          |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| disableCheckboxes        | Boolean          |  false                                   | Disables all node items checkboxes.      |
+|                          |                  |                                          | Note! It is also possible to disable     |
+|                          |                  |                                          | specific checkboxes, but thats still un- |
+|                          |                  |                                          | tested feature.                          |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| treeData                 | Array            | []                                       | Array of node objects.                   |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| dataLookUpKey            | String           | 'key'                                    | Unique identifier of data item.          |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| dataLookUpChildren       | String           | 'children'                               | Data item property to identifiy subitems |
+| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+
+
 
 ### Code example
 ```jsx
 import React from 'react';
-import { Example } from '@opuscapita/react-component-example';
+import { OCTreeView } from '@opuscapita/react-tree-component';   
 
-export default class ReactView extends React.Component {
+export default class TreeView extends React.Component {
+  const familyData = [
+    {
+      personId: '100',
+      name: 'John Doe',
+      siblings: [
+        { personId: '100100', name: 'Martha Doe', siblings: [] },
+        { personId: '100200', name: 'Jonathan Doe', siblings: [ { personId: '100200100', name: 'Mike Doe', siblings: [] }] },
+      ], 
+    },
+    {
+      personId: '200',
+      name: 'Haley Miley',
+      siblings: [
+        { personId: '200100', name: 'Cyrus Miley', siblings: [] },
+      ],
+    },
+  ]; 
+  const treeConfig = {
+    treeData: exampleData,
+    treeId: 'FamilyTree',
+    checkable: true,
+    selectable: false,
+    defaultExpandAll: false,
+    showLine: true,
+    showIcon: false,
+    dataLookUpKey: 'personId',
+    dataLookUpValue: 'name',
+    dataLookUpChildren: 'siblings',
+    disableCheckbox: true,
+  };
   render() {
     return (
-      <Example
-        propName="propValue"
-      />
+      <OCTreeView {...treeConfig} />
     );
   }
 }
