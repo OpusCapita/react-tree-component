@@ -25,68 +25,33 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | Prop name                | Type             | Default                                  | Description                              |
 | ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | treeId                   | string           |  defaultTree                             | Tree identifier                          |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | treeClass                | string           |  ''                                      | Tree container custom class for styling  |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | iconClass                | string           |  ''                                      | FontAwesome content based indicators:    |
-|                          |                  |                                          | 'chevron' - nodes as chevrons            |
-|                          |                  |                                          | :fa-chevron-right: :fa-chevron-down:     |
-|                          |                  |                                          | 'carets'  - nodes as carets              |
-|                          |                  |                                          | :fa-caret-right: :fa-caret-down:         |
-|                          |                  |                                          | 'arrow'   - nodes as arrows              |
-|                          |                  |                                          | :fa-arrow-right: :fa-arrow-down:         |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+|                          |                  |  chevron                                 | nodes as chevrons                        |
+|                          |                  |  carets                                  | nodes as carets                          |
+|                          |                  |  arrow                                   | nodes as arrows                          |
 | defaultExpandedKeys      | Array            |  []                                      | Array of item ids to expand by default   |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | defaultSelectedKeys      | Array            |  []                                      | Array of item ids selected by default    |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | defaultCheckedKeys       | Array            |  []                                      | Array of item ids checked by default     |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
-| onExpand                 | Function         |  () => {}                                | Handling the node expand.                |
-|                          |                  |                                          | Takes 'expandedKeys' as parameter        |
-|                          |                  |                                          | ```jsx onExpand(expKeys) {           ``` |
-|                          |                  |                                          | ``` console.log(expKeys, arguments); ``` |
-|                          |                  |                                          | ``` }                                ``` |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
-| onSelect                 | Function         |  () => {}                                | Handling the item select.                |
-|                          |                  |                                          | Takes 'selectedKeys' as parameter        |
-|                          |                  |                                          | Takes 'info' (event object to get node)  |
-|                          |                  |                                          | ```jsx onSelect(selKeys, info) {     ``` |
-|                          |                  |                                          | ``` console.log(selKeys, info);      ``` |
-|                          |                  |                                          | ``` }                                ``` |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+| onExpand                 | Function         |  () => {}                                | Handling the node expand. Takes 'expandedKeys' as parameter ```jsx onExpand(expKeys) { console.log(expKeys, arguments); }                                ```|
+| onSelect                 | Function         |  () => {}                                | Handling the item select. Takes 'selectedKeys' and 'info' (event object to get node)as parameter ```jsx onSelect(selKeys, info) { console.log(selKeys, info); }                        ```|
 | onCheck                  | Function         |  () => {}                                | Handling the item checked                |
-|                          |                  |                                          | Takes 'checkedKeys' as parameter         |
-|                          |                  |                                          | Takes 'info' (event object to get node)  |
-|                          |                  |                                          | ```jsx onCheck (chkKeys, info) {     ``` |
-|                          |                  |                                          | ``` console.log(chkKeys, info);      ``` |
-|                          |                  |                                          | ``` }                                ``` |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
+|                          |                  |                                          | Takes 'checkedKeys' and info' (event object to get node) as parameter ```jsx onCheck (chkKeys, info) { console.log(chkKeys, info); }                                ``` |
 | showLine                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | checkable                | Boolean          |  false                                   | Whether show or hide checkboxes from tree|
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | selectable               | Boolean          |  false                                   | Whether item can be selected.            |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | defaultExpandAll         | Boolean          |  false                                   | Expand all nodes by default.             |
 |                          |                  |                                          | Note! For better performance do not      |
 |                          |                  |                                          | enable this for large dataSets.          |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | disableCheckboxes        | Boolean          |  false                                   | Disables all node items checkboxes.      |
 |                          |                  |                                          | Note! It is also possible to disable     |
 |                          |                  |                                          | specific checkboxes, but thats still un- |
 |                          |                  |                                          | tested feature.                          |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | treeData                 | Array            | []                                       | Array of node objects.                   |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | dataLookUpKey            | String           | 'key'                                    | Unique identifier of data item.          |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | dataLookUpChildren       | String           | 'children'                               | Data item property to identifiy subitems |
-| ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 
 
 
