@@ -35,8 +35,7 @@
     "font-awesome": "4.7.0",
     "prop-types": "15.6.0",
     "react": "15 || 16",
-    "react-dom": "15 || 16",
-    "rc-tree": "1.7.11"
+    "react-dom": "15 || 16"
   },
   "devDependencies": {
     "autoprefixer": "8.0.0",
@@ -80,7 +79,6 @@
     "precss": "3.1.0",
     "progress-bar-webpack-plugin": "1.11.0",
     "prop-types": "15.6.0",
-    "rc-tree": "1.7.11",
     "react": "16.2.0",
     "react-bootstrap": "0.32.1",
     "react-dom": "16.2.0",
@@ -101,7 +99,9 @@
     "webpack-notifier": "1.5.1",
     "write-file-webpack-plugin": "4.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "rc-tree": "1.7.11"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/OpusCapita/react-treeview.git"
