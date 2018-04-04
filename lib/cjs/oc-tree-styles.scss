@@ -78,3 +78,11 @@
     //position: absolute;
   }
 }
+
+.rc-tree {
+  li.disabled {
+    span:not(.rc-tree-switcher) {
+      cursor: default;
+    }
+  }
+}
