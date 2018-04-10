@@ -1,5 +1,4 @@
 import React from 'react';
-import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
 import 'rc-tree/assets/index.css';
@@ -30,6 +29,7 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpValue: PropTypes.string.isRequired,
     dataLookUpChildren: PropTypes.string.isRequired,
   };
+
   static defaultProps = {
     treeId: 'defaultTree',
     treeClass: '',
@@ -54,12 +54,12 @@ export default class OCTreeView extends React.PureComponent {
     treeData: [],
   };
 
-  /* hasChildrens - function */
-  hasChildrens = (dataObject) => {
+  /* hasChildren - function */
+  hasChildren = (dataObject) => {
     return (dataObject[this.props.dataLookUpChildren]
       && dataObject[this.props.dataLookUpChildren].length >= 1
     );
-  }
+  };
 
   /* renderNodes - function */
   renderNodes() {
@@ -67,18 +67,21 @@ export default class OCTreeView extends React.PureComponent {
     const nodeVal = this.props.dataLookUpValue;
     const nodeChild = this.props.dataLookUpChildren;
     const disableNodeCheckboxes = this.props.disableCheckboxes;
-    const checkChilds = this.hasChildrens;
+    const checkChildren = this.hasChildren;
+    const disableCls = disableNodeCheckboxes ? 'disabled' : '';
     const customIcon = this.props.iconClass;
+
     // Recursive function for collecting nodes:
-    const mountNodes = function (nlist) {
+    const mountNodes = (nodeList) => {
       const lst = [];
-      nlist.forEach((node) => {
-        if (!checkChilds(node)) {
+      nodeList.forEach((node) => {
+        if (!node[nodeKey]) return false;
+        if (!checkChildren(node)) {
           lst.push(
             <TreeNode
               title={node[nodeVal]}
               key={node[nodeKey]}
-              className={customIcon}
+              className={`${customIcon} ${disableCls}`}
               disableCheckbox={disableNodeCheckboxes}
             />);
         } else {
@@ -86,10 +89,10 @@ export default class OCTreeView extends React.PureComponent {
             <TreeNode
               title={node[nodeVal]}
               key={node[nodeKey]}
-              className={customIcon}
+              className={`${customIcon} ${disableCls}`}
               disableCheckbox={disableNodeCheckboxes}
             >
-              { mountNodes(node[nodeChild]) }
+              {mountNodes(node[nodeChild])}
             </TreeNode>,
           );
         }
@@ -102,14 +105,17 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const clsName = this.props.treeClass ? `${this.props.treeClass} oc-react-tree` : 'oc-react-tree';
+
     return (
       <div id="tree-view-container" className={clsName}>
+        {nodes.length &&
         <Tree
           id={this.props.treeId}
           className={this.props.treeClass}
           defaultExpandedKeys={this.props.defaultExpandedKeys}
           defaultSelectedKeys={this.props.defaultSelectedKeys}
           defaultCheckedKeys={this.props.defaultCheckedKeys}
+          checkedKeys={this.props.checkedKeys}
           onExpand={this.props.onExpand}
           onSelect={this.props.onSelect}
           onCheck={this.props.onCheck}
@@ -119,8 +125,9 @@ export default class OCTreeView extends React.PureComponent {
           selectable={this.props.selectable}
           defaultExpandAll={this.props.defaultExpandAll}
         >
-          { nodes }
+          {nodes}
         </Tree>
+        }
       </div>
     );
   }
