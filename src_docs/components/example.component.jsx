@@ -1,24 +1,22 @@
 import React from 'react';
 import BaseTree from './base-tree.component';
 import {
-  PlainTreeConfig,
-  NoSelectConfig,
-  ChevronConfig,
-  ArrowConfig,
-  AllTrueWithChevronConfig,
   AllTrueDefaultConfig,
-  NoIconDefaultConfig,
+  AllTrueWithChevronConfig,
+  ArrowConfig,
   CaretConfig,
-  DefaultSelectedKeysConfig,
+  ChevronConfig,
   CustomLookUpConfig,
+  DefaultSelectedKeysConfig,
+  NoIconDefaultConfig,
+  NoSelectConfig,
+  PlainTreeConfig,
 } from './constants';
 
 import './example-component.scss';
 
 export default class ComponentView extends React.PureComponent {
-
   render() {
-
     return (
       <div id="oc-react-tree-container" className="oc-columns">
         <div id="columns-container" className="oc-columns-container">

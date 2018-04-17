@@ -1,35 +1,40 @@
-import React from 'react';
+import perms from '../mockdata/perms.json';
 
 export const TreeViewData = [
-    { key: 'item1',
-      parent: 'Item 1',
-      children: [
-        { key: 'item1.1', parent: 'Item 1.1', selectable: false, children: [] },
-        { key: 'item1.2', parent: 'Item 1.2', children: [] },
-        { key: 'item1.3',
-          parent: 'Item 1.3',
-          children: [
+  {
+    key: 'item1',
+    parent: 'Item 1',
+    children: [
+      {
+        key: 'item1.1', parent: 'Item 1.1', selectable: false, children: [],
+      },
+      { key: 'item1.2', parent: 'Item 1.2', children: [] },
+      {
+        key: 'item1.3',
+        parent: 'Item 1.3',
+        children: [
           { key: 'item1.3.1', parent: 'Item 1.3.1', children: [] },
           { key: 'item1.3.2', parent: 'Item 1.3.2', children: [] },
           { key: 'item1.3.3', parent: 'Item 1.3.3', children: [] },
-          ],
-        },
-      ],
-    },
-    {
-      key: 'item2',
-      parent: 'Item 2',
-      children: [
-        { key: 'item2.1', parent: 'Item 2.1', children: [] },
-        { key: 'item2.2', parent: 'Item 2.2', children: [] },
-      ],
-    },
-    { key: 'item3', parent: 'Item 3', children: [] },
-    {
-      key: 'item4',
-      parent: 'Item 4',
-      children: [] },
-]
+        ],
+      },
+    ],
+  },
+  {
+    key: 'item2',
+    parent: 'Item 2',
+    children: [
+      { key: 'item2.1', parent: 'Item 2.1', children: [] },
+      { key: 'item2.2', parent: 'Item 2.2', children: [] },
+    ],
+  },
+  { key: 'item3', parent: 'Item 3', children: [] },
+  {
+    key: 'item4',
+    parent: 'Item 4',
+    children: [],
+  },
+];
 
 export const PlainTreeConfig = {
   description: 'TreeView - items are selectable, checkable. No other customization. ',
@@ -168,7 +173,7 @@ export const DefaultSelectedKeysConfig = {
 };
 
 function getData() {
-  return [require('../mockdata/perms.json')];
+  return [perms];
 }
 
 export const CustomLookUpConfig = {
