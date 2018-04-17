@@ -108,7 +108,7 @@ export default class OCTreeView extends React.PureComponent {
 
     return (
       <div id="tree-view-container" className={clsName}>
-        {nodes.length &&
+        {!!nodes.length &&
         <Tree
           id={this.props.treeId}
           className={this.props.treeClass}

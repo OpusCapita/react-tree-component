@@ -4,5 +4,8 @@
 
 ## <next>
 
+## 1.0.1
+* Fixed a bug where tree rendered incorrectly when there were no items in the list
+
 ## 1.0.0
 * Initial release
