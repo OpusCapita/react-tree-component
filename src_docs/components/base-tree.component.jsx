@@ -1,10 +1,29 @@
 import React from 'react';
-import { fromJS, List } from 'immutable';
+import { fromJS } from 'immutable';
+import PropTypes from 'prop-types';
 import OCTreeView from '../../src/index';
 
 import './base.scss';
 
 export default class BaseTree extends React.PureComponent {
+  static propTypes = {
+    headerText: PropTypes.string,
+    description: PropTypes.string,
+    treeData: PropTypes.arrayOf(PropTypes.shape({})),
+    tree: PropTypes.shape({
+      defaultCheckedKeys: PropTypes.arrayOf(PropTypes.string),
+    }),
+  };
+
+  static defaultProps = {
+    headerText: undefined,
+    description: undefined,
+    tree: {
+      defaultCheckedKeys: [],
+    },
+    treeData: [],
+  };
+
   constructor(props) {
     super(props);
     const checkedKeys = props.tree.defaultCheckedKeys;
@@ -15,43 +34,30 @@ export default class BaseTree extends React.PureComponent {
     };
   }
 
-  // Think about the tree data still
-
-  treeview_onExpand(expandedKeys){
-    console.log('onExpand', expandedKeys, arguments);
-  }
-
-  treeview_onSelect(selectedKeys, info){
-    console.log('onSelect', selectedKeys, info);
+  treeViewOnSelect = (selectedKeys, info) => {
     this.selKey = info.node.props.eventKey;
-  }
+  };
 
-  treeview_onCheck(checkedKeys, info){
-    console.log('onCheck', checkedKeys, info);
-  }
+  treeViewOnCheck = (keys) => {
+    this.setState({
+      checkedKeys: keys,
+    });
+  };
 
-  componentWillMount() {
-    console.log('Props: ', this.props);
-  }
-
-  renderConfiguration = (treeProps) => {
-    const conf = fromJS(treeProps);
-    return (
-      <pre className="example-config">
-        <h4>Tree configuration</h4>
-        <code>
-        {
-          fromJS(treeProps).entrySeq().map(
-            ([key, value]) => (<div className="config-content">
-              <div className="property-key">{`${key}:`}</div>
-              <div className="property-value">{value}</div>
-            </div>)
-          )
-        }
+  renderConfiguration = treeProps => (
+    <pre className="example-config">
+      <h4>Tree configuration</h4>
+      <code>{
+        fromJS(treeProps).entrySeq().map(([key, value]) => (
+          <div className="config-content" key={key}>
+            <div className="property-key">{`${key}:`}</div>
+            <div className="property-value">{value}</div>
+          </div>
+        ))
+      }
       </code>
-      </pre>
-    );
-  }
+    </pre>
+  );
 
   render() {
     const {
@@ -61,12 +67,12 @@ export default class BaseTree extends React.PureComponent {
       tree,
     } = this.props;
     // Boolean Flags:
-    const isCheckable = (tree.checkable == 'true');
-    const isSelectable = (tree.selectable == 'true');
-    const expandAll = (tree.defaultExpandAll == 'true');
-    const showLine = (tree.showLine == 'true');
-    const showIcon = (tree.showIcon == 'true');
-    const disableCheckboxes = (tree.disableCheckbox == 'true');
+    const isCheckable = (tree.checkable === 'true');
+    const isSelectable = (tree.selectable === 'true');
+    const expandAll = (tree.defaultExpandAll === 'true');
+    const showLine = (tree.showLine === 'true');
+    const showIcon = (tree.showIcon === 'true');
+    const disableCheckboxes = (tree.disableCheckbox === 'true');
     const lookUpKey = tree.dataLookUpKey || 'key';
     const lookUpValue = tree.dataLookUpValue || 'parent';
     const children = tree.dataLookUpChildren || 'children';
@@ -77,9 +83,9 @@ export default class BaseTree extends React.PureComponent {
           <div id="header-text"><h3>{headerText}</h3></div>
           <div id="configuration-opts">
             <div id="description">
-              { description }
+              {description}
             </div>
-            { this.renderConfiguration(tree) }
+            {this.renderConfiguration(tree)}
           </div>
         </div>
         <div className="example-tree-container">
@@ -90,9 +96,10 @@ export default class BaseTree extends React.PureComponent {
               defaultExpandedKeys={this.state.defaultExpandedKeys}
               defaultSelectedKeys={tree.defaultSelectedKeys || this.state.defaultSelectedKeys}
               defaultCheckedKeys={this.state.defaultCheckedKeys}
-              onExpand={this.treeview_onExpand}
-              onSelect={this.treeview_onSelect}
-              onCheck={this.treeview_onCheck}
+              onExpand={this.treeViewOnExpand}
+              onSelect={this.treeViewOnSelect}
+              onCheck={this.treeViewOnCheck}
+              checkedKeys={this.state.checkedKeys}
               iconClass={tree.iconClass || null}
               checkable={isCheckable}
               selectable={isSelectable}

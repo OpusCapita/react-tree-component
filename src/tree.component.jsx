@@ -7,7 +7,7 @@ import './oc-tree-styles.scss';
 
 export default class OCTreeView extends React.PureComponent {
   static propTypes = {
-    treeId: PropTypes.string.isRequired,
+    treeId: PropTypes.string,
     treeClass: PropTypes.string,
     iconClass: PropTypes.string,
     defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
@@ -25,9 +25,10 @@ export default class OCTreeView extends React.PureComponent {
     disableCheckboxes: PropTypes.bool,
     // Customisation -- define the data lookUpKeys and lookUpValues
     treeData: PropTypes.arrayOf(PropTypes.object),
-    dataLookUpKey: PropTypes.string.isRequired,
-    dataLookUpValue: PropTypes.string.isRequired,
-    dataLookUpChildren: PropTypes.string.isRequired,
+    dataLookUpKey: PropTypes.string,
+    dataLookUpValue: PropTypes.string,
+    dataLookUpChildren: PropTypes.string,
+    checkedKeys: PropTypes.arrayOf(PropTypes.string),
   };
 
   static defaultProps = {
@@ -52,14 +53,13 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpValue: 'parent',
     dataLookUpChildren: 'children',
     treeData: [],
+    checkedKeys: [],
   };
 
   /* hasChildren - function */
-  hasChildren = (dataObject) => {
-    return (dataObject[this.props.dataLookUpChildren]
-      && dataObject[this.props.dataLookUpChildren].length >= 1
-    );
-  };
+  hasChildren = dataObject => ((dataObject[this.props.dataLookUpChildren]
+    && dataObject[this.props.dataLookUpChildren].length >= 1
+  ));
 
   /* renderNodes - function */
   renderNodes() {
@@ -77,7 +77,7 @@ export default class OCTreeView extends React.PureComponent {
       nodeList.forEach((node) => {
         if (!node[nodeKey]) return false;
         if (!checkChildren(node)) {
-          lst.push(
+          lst.push( // eslint-disable-line function-paren-newline
             <TreeNode
               title={node[nodeVal]}
               key={node[nodeKey]}
@@ -85,7 +85,7 @@ export default class OCTreeView extends React.PureComponent {
               disableCheckbox={disableNodeCheckboxes}
             />);
         } else {
-          lst.push(
+          lst.push( // eslint-disable-line function-paren-newline
             <TreeNode
               title={node[nodeVal]}
               key={node[nodeKey]}
@@ -93,9 +93,9 @@ export default class OCTreeView extends React.PureComponent {
               disableCheckbox={disableNodeCheckboxes}
             >
               {mountNodes(node[nodeChild])}
-            </TreeNode>,
-          );
+            </TreeNode>);
         }
+        return false;
       });
       return lst;
     };
@@ -131,5 +131,4 @@ export default class OCTreeView extends React.PureComponent {
       </div>
     );
   }
-
 }
