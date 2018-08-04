@@ -100,7 +100,7 @@
     "write-file-webpack-plugin": "4.2.0"
   },
   "dependencies": {
-    "rc-tree": "1.7.11"
+    "rc-tree": "1.12.7"
   },
   "repository": {
     "type": "git",

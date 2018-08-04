@@ -193,3 +193,17 @@ export const CustomLookUpConfig = {
     disableCheckbox: 'true',
   },
 };
+
+export const DraggableConfig = {
+  description: 'TreeView - items are selectable, checkable and draggable',
+  headerText: 'Draggable Items',
+  treeData: TreeViewData,
+  tree: {
+    treeId: 'PlainTreeViewExample',
+    checkable: 'true',
+    selectable: 'true',
+    defaultExpandAll: 'true',
+    disableCheckbox: 'false',
+    draggable: 'true',
+  },
+}

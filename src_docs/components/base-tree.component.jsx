@@ -44,6 +44,13 @@ export default class BaseTree extends React.PureComponent {
     });
   };
 
+  treeViewOnDragDrop = (newItems) => {
+    console.log('dropping', newItems)
+    this.setState({
+      treeData: newItems,
+    });
+  };
+
   renderConfiguration = treeProps => (
     <pre className="example-config">
       <h4>Tree configuration</h4>
@@ -69,6 +76,7 @@ export default class BaseTree extends React.PureComponent {
     // Boolean Flags:
     const isCheckable = (tree.checkable === 'true');
     const isSelectable = (tree.selectable === 'true');
+    const isDraggable = (tree.draggable === 'true');
     const expandAll = (tree.defaultExpandAll === 'true');
     const showLine = (tree.showLine === 'true');
     const showIcon = (tree.showIcon === 'true');
@@ -76,6 +84,7 @@ export default class BaseTree extends React.PureComponent {
     const lookUpKey = tree.dataLookUpKey || 'key';
     const lookUpValue = tree.dataLookUpValue || 'parent';
     const children = tree.dataLookUpChildren || 'children';
+    const modifiedTreeData = this.state.treeData || treeData;
 
     return (
       <div id="plain-tree-example-container">
@@ -92,17 +101,19 @@ export default class BaseTree extends React.PureComponent {
           <div className="trees">
             <OCTreeView
               treeId={tree.treeId}
-              treeData={treeData}
+              treeData={modifiedTreeData}
               defaultExpandedKeys={this.state.defaultExpandedKeys}
               defaultSelectedKeys={tree.defaultSelectedKeys || this.state.defaultSelectedKeys}
               defaultCheckedKeys={this.state.defaultCheckedKeys}
               onExpand={this.treeViewOnExpand}
               onSelect={this.treeViewOnSelect}
               onCheck={this.treeViewOnCheck}
+              onDragDrop={this.treeViewOnDragDrop}
               checkedKeys={this.state.checkedKeys}
               iconClass={tree.iconClass || null}
               checkable={isCheckable}
               selectable={isSelectable}
+              draggable={isDraggable}
               defaultExpandAll={expandAll}
               showIcon={showIcon}
               showLine={showLine}

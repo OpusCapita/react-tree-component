@@ -16,10 +16,12 @@ export default class OCTreeView extends React.PureComponent {
     onExpand: PropTypes.func,
     onSelect: PropTypes.func,
     onCheck: PropTypes.func,
+    onDragDrop: PropTypes.func,
     showLine: PropTypes.bool,
     showIcon: PropTypes.bool,
     checkable: PropTypes.bool,
     selectable: PropTypes.bool,
+    draggable: PropTypes.bool,
     defaultExpandAll: PropTypes.bool,
     // Node related props:
     disableCheckboxes: PropTypes.bool,
@@ -41,9 +43,11 @@ export default class OCTreeView extends React.PureComponent {
     onExpand: undefined,
     onSelect: undefined,
     onCheck: undefined,
+    onDragDrop: undefined,
     showLine: false,
     showIcon: false,
     checkable: false,
+    draggable: false,
     selectable: false,
     defaultExpandAll: false,
     // Node related props:
@@ -54,6 +58,48 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpChildren: 'children',
     treeData: [],
     checkedKeys: [],
+  };
+
+
+  onDragDrop = (e) => {
+    if (!this.props.onDragDrop) throw new TypeError('onDragDrop callback is not defined');
+
+    const dropKey = e.node.props.eventKey;
+    const dragKey = e.dragNode.props.eventKey;
+
+    const loop = (data, key, callback) => {
+      data.forEach((item, index, arr) => {
+        if (item.key === key) return callback(item, index, arr);
+        if (item.children) return loop(item.children, key, callback);
+        return null;
+      });
+    };
+
+    const newData = this.props.treeData.slice();
+
+    let dragObj;
+    loop(newData, dragKey, (item, index, arr) => {
+      arr.splice(index, 1);
+      dragObj = item;
+    });
+
+    // .. item is dropped between 2 items
+    if (e.dropToGap) {
+      let ar;
+      let i;
+      loop(newData, dropKey, (item, index, arr) => {
+        ar = arr;
+        i = index;
+      });
+      ar.splice(i, 0, dragObj);
+    } else {
+      loop(newData, dropKey, (item) => {
+        item.children = item.children || []; // eslint-disable-line no-param-reassign
+        item.children.push(dragObj);
+      });
+    }
+
+    this.props.onDragDrop(newData);
   };
 
   /* hasChildren - function */
@@ -102,28 +148,36 @@ export default class OCTreeView extends React.PureComponent {
     return mountNodes(this.props.treeData);
   }
 
+
   render() {
     const nodes = this.renderNodes();
     const clsName = this.props.treeClass ? `${this.props.treeClass} oc-react-tree` : 'oc-react-tree';
+    const {
+      treeId, treeClass, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
+      onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable, defaultExpandAll,
+      draggable,
+    } = this.props;
 
     return (
       <div id="tree-view-container" className={clsName}>
         {!!nodes.length &&
         <Tree
-          id={this.props.treeId}
-          className={this.props.treeClass}
-          defaultExpandedKeys={this.props.defaultExpandedKeys}
-          defaultSelectedKeys={this.props.defaultSelectedKeys}
-          defaultCheckedKeys={this.props.defaultCheckedKeys}
-          checkedKeys={this.props.checkedKeys}
-          onExpand={this.props.onExpand}
-          onSelect={this.props.onSelect}
-          onCheck={this.props.onCheck}
-          showLine={this.props.showLine}
-          showIcon={this.props.showIcon}
-          checkable={this.props.checkable}
-          selectable={this.props.selectable}
-          defaultExpandAll={this.props.defaultExpandAll}
+          id={treeId}
+          className={treeClass}
+          defaultExpandedKeys={defaultExpandedKeys}
+          defaultSelectedKeys={defaultSelectedKeys}
+          defaultCheckedKeys={defaultCheckedKeys}
+          checkedKeys={checkedKeys}
+          onExpand={onExpand}
+          onSelect={onSelect}
+          onCheck={onCheck}
+          showLine={showLine}
+          showIcon={showIcon}
+          checkable={checkable}
+          selectable={selectable}
+          draggable={draggable}
+          defaultExpandAll={defaultExpandAll}
+          onDrop={this.onDragDrop}
         >
           {nodes}
         </Tree>

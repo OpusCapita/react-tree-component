@@ -11,6 +11,7 @@ import {
   NoIconDefaultConfig,
   NoSelectConfig,
   PlainTreeConfig,
+  DraggableConfig,
 } from './constants';
 
 import './example-component.scss';
@@ -48,8 +49,11 @@ export default class ComponentView extends React.PureComponent {
           <div id="defaultselected-tree-view" className="oc-columns-item-container">
             <BaseTree {...DefaultSelectedKeysConfig} />
           </div>
-          <div id="defaultselected-tree-view" className="oc-columns-item-container">
+          <div id="custom-lookup-tree-view" className="oc-columns-item-container">
             <BaseTree {...CustomLookUpConfig} />
+          </div>
+          <div id="draggable-tree-view" className="oc-columns-item-container">
+            <BaseTree {...DraggableConfig} />
           </div>
         </div>
       </div>
