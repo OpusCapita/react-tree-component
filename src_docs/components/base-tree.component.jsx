@@ -45,7 +45,6 @@ export default class BaseTree extends React.PureComponent {
   };
 
   treeViewOnDragDrop = (newItems) => {
-    console.log('dropping', newItems)
     this.setState({
       treeData: newItems,
     });
