@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 1.1.0
+* Added a drag 'n drop functionality
+
 ## 1.0.1
 * Fixed a bug where tree rendered incorrectly when there were no items in the list
 * Fixed examples and a few eslint issues

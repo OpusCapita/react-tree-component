@@ -36,11 +36,13 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onExpand                 | Function         |  () => {}                                | Handling the node expand. Takes 'expandedKeys' as parameter ```jsx onExpand(expKeys) { console.log(expKeys, arguments); }                                ```|
 | onSelect                 | Function         |  () => {}                                | Handling the item select. Takes 'selectedKeys' and 'info' (event object to get node)as parameter ```jsx onSelect(selKeys, info) { console.log(selKeys, info); }                        ```|
 | onCheck                  | Function         |  () => {}                                | Handling the item checked                |
+| onDragDrop               | Function         |  () => {}                                | Fires when item is dragged and dropped   |
 |                          |                  |                                          | Takes 'checkedKeys' and info' (event object to get node) as parameter ```jsx onCheck (chkKeys, info) { console.log(chkKeys, info); }                                ``` |
 | showLine                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | checkable                | Boolean          |  false                                   | Whether show or hide checkboxes from tree|
 | selectable               | Boolean          |  false                                   | Whether item can be selected.            |
+| draggable                | Boolean          |  false                                   | Whether item can be dragged around.      |
 | defaultExpandAll         | Boolean          |  false                                   | Expand all nodes by default.             |
 |                          |                  |                                          | Note! For better performance do not      |
 |                          |                  |                                          | enable this for large dataSets.          |
@@ -52,7 +54,6 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | dataLookUpKey            | String           | 'key'                                    | Unique identifier of data item.          |
 | dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
 | dataLookUpChildren       | String           | 'children'                               | Data item property to identifiy subitems |
-
 
 
 ### Code example
