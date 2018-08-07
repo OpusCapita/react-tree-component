@@ -206,4 +206,4 @@ export const DraggableConfig = {
     disableCheckbox: 'false',
     draggable: 'true',
   },
-}
+};
