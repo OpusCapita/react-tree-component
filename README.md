@@ -42,14 +42,11 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | checkable                | Boolean          |  false                                   | Whether show or hide checkboxes from tree|
 | selectable               | Boolean          |  false                                   | Whether item can be selected.            |
+| disabled                 | Boolean          |  false                                   | Disables all node items checkboxes.      |
 | draggable                | Boolean          |  false                                   | Whether item can be dragged around.      |
 | defaultExpandAll         | Boolean          |  false                                   | Expand all nodes by default.             |
 |                          |                  |                                          | Note! For better performance do not      |
 |                          |                  |                                          | enable this for large dataSets.          |
-| disableCheckboxes        | Boolean          |  false                                   | Disables all node items checkboxes.      |
-|                          |                  |                                          | Note! It is also possible to disable     |
-|                          |                  |                                          | specific checkboxes, but thats still un- |
-|                          |                  |                                          | tested feature.                          |
 | treeData                 | Array            | []                                       | Array of node objects.                   |
 | dataLookUpKey            | String           | 'key'                                    | Unique identifier of data item.          |
 | dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
