@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Changed disabling logic a bit (removed disableCheckboxes prop and added disabled prop)
 
 ## 1.1.0
 * Added a drag 'n drop functionality

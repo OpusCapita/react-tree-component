@@ -45,7 +45,7 @@ export const PlainTreeConfig = {
     checkable: 'true',
     selectable: 'true',
     defaultExpandAll: 'true',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -58,7 +58,7 @@ export const NoSelectConfig = {
     checkable: 'true',
     selectable: 'false',
     defaultExpandAll: 'true',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -74,7 +74,7 @@ export const ChevronConfig = {
     showLine: 'false',
     showIcon: 'false',
     iconClass: 'chevron',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -90,7 +90,7 @@ export const ArrowConfig = {
     showLine: 'false',
     showIcon: 'false',
     iconClass: 'arrow',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -104,7 +104,7 @@ export const CaretConfig = {
     selectable: 'false',
     defaultExpandAll: 'true',
     iconClass: 'carets',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -120,7 +120,7 @@ export const AllTrueWithChevronConfig = {
     showLine: 'true',
     showIcon: 'true',
     iconClass: 'chevron',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -135,7 +135,7 @@ export const AllTrueDefaultConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'true',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -150,7 +150,7 @@ export const NoIconDefaultConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'false',
-    disableCheckbox: 'false',
+    disabled: 'false',
   },
 };
 
@@ -165,7 +165,7 @@ export const DefaultSelectedKeysConfig = {
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'false',
-    disableCheckbox: 'false',
+    disabled: 'false',
     defaultCheckedKeys: [
       'item1.2', 'item1.3.1',
     ],
@@ -190,7 +190,7 @@ export const CustomLookUpConfig = {
     dataLookUpKey: 'permissionId',
     dataLookUpValue: 'name',
     dataLookUpChildren: 'subRights',
-    disableCheckbox: 'true',
+    disabled: 'true',
   },
 };
 
@@ -203,7 +203,7 @@ export const DraggableConfig = {
     checkable: 'true',
     selectable: 'true',
     defaultExpandAll: 'true',
-    disableCheckbox: 'false',
+    disabled: 'false',
     draggable: 'true',
   },
 };
