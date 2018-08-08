@@ -22,9 +22,8 @@ export default class OCTreeView extends React.PureComponent {
     checkable: PropTypes.bool,
     selectable: PropTypes.bool,
     draggable: PropTypes.bool,
+    disabled: PropTypes.bool,
     defaultExpandAll: PropTypes.bool,
-    // Node related props:
-    disableCheckboxes: PropTypes.bool,
     // Customisation -- define the data lookUpKeys and lookUpValues
     treeData: PropTypes.arrayOf(PropTypes.object),
     dataLookUpKey: PropTypes.string,
@@ -45,13 +44,12 @@ export default class OCTreeView extends React.PureComponent {
     onCheck: undefined,
     onDragDrop: undefined,
     showLine: false,
+    disabled: false,
     showIcon: false,
     checkable: false,
     draggable: false,
     selectable: false,
     defaultExpandAll: false,
-    // Node related props:
-    disableCheckboxes: false,
     // Customs
     dataLookUpKey: 'key',
     dataLookUpValue: 'parent',
@@ -112,9 +110,7 @@ export default class OCTreeView extends React.PureComponent {
     const nodeKey = this.props.dataLookUpKey;
     const nodeVal = this.props.dataLookUpValue;
     const nodeChild = this.props.dataLookUpChildren;
-    const disableNodeCheckboxes = this.props.disableCheckboxes;
     const checkChildren = this.hasChildren;
-    const disableCls = disableNodeCheckboxes ? 'disabled' : '';
     const customIcon = this.props.iconClass;
 
     // Recursive function for collecting nodes:
@@ -127,16 +123,14 @@ export default class OCTreeView extends React.PureComponent {
             <TreeNode
               title={node[nodeVal]}
               key={node[nodeKey]}
-              className={`${customIcon} ${disableCls}`}
-              disableCheckbox={disableNodeCheckboxes}
+              className={`${customIcon}`}
             />);
         } else {
           lst.push( // eslint-disable-line function-paren-newline
             <TreeNode
               title={node[nodeVal]}
               key={node[nodeKey]}
-              className={`${customIcon} ${disableCls}`}
-              disableCheckbox={disableNodeCheckboxes}
+              className={`${customIcon}`}
             >
               {mountNodes(node[nodeChild])}
             </TreeNode>);
@@ -155,7 +149,7 @@ export default class OCTreeView extends React.PureComponent {
     const {
       treeId, treeClass, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
       onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable, defaultExpandAll,
-      draggable,
+      draggable, disabled,
     } = this.props;
 
     return (
@@ -175,6 +169,7 @@ export default class OCTreeView extends React.PureComponent {
           showIcon={showIcon}
           checkable={checkable}
           selectable={selectable}
+          disabled={disabled}
           draggable={draggable}
           defaultExpandAll={defaultExpandAll}
           onDrop={this.onDragDrop}

@@ -80,9 +80,10 @@
 }
 
 .rc-tree {
-  li.disabled {
-    span:not(.rc-tree-switcher) {
+  .rc-tree-treenode-disabled {
+    > span:not(.rc-tree-switcher) {
       cursor: default;
+      color: inherit;
     }
   }
 }

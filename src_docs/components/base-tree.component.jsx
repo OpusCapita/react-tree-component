@@ -79,7 +79,7 @@ export default class BaseTree extends React.PureComponent {
     const expandAll = (tree.defaultExpandAll === 'true');
     const showLine = (tree.showLine === 'true');
     const showIcon = (tree.showIcon === 'true');
-    const disableCheckboxes = (tree.disableCheckbox === 'true');
+    const disabled = (tree.disabled === 'true');
     const lookUpKey = tree.dataLookUpKey || 'key';
     const lookUpValue = tree.dataLookUpValue || 'parent';
     const children = tree.dataLookUpChildren || 'children';
@@ -119,7 +119,7 @@ export default class BaseTree extends React.PureComponent {
               dataLookUpKey={lookUpKey}
               dataLookUpValue={lookUpValue}
               dataLookUpChildren={children}
-              disableCheckboxes={disableCheckboxes}
+              disabled={disabled}
             />
           </div>
         </div>
