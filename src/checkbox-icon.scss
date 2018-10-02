@@ -1,0 +1,14 @@
+.tree-checkbox {
+  border: 1px solid #ccc;
+  height: 1.6rem;
+  width: 1.6rem;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &.disabled {
+    background-color: #EFF2F4;
+    cursor: default;
+  }
+}

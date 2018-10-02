@@ -4,6 +4,7 @@ import Tree, { TreeNode } from 'rc-tree';
 import 'rc-tree/assets/index.css';
 // Override defaults rc-tree styles
 import './oc-tree-styles.scss';
+import CheckboxIcon from './checkbox-icon.component';
 
 export default class OCTreeView extends React.PureComponent {
   static propTypes = {
@@ -35,7 +36,7 @@ export default class OCTreeView extends React.PureComponent {
   static defaultProps = {
     treeId: 'defaultTree',
     treeClass: '',
-    iconClass: '',
+    iconClass: 'carets',
     defaultExpandedKeys: [],
     defaultSelectedKeys: [],
     defaultCheckedKeys: [],
@@ -45,7 +46,7 @@ export default class OCTreeView extends React.PureComponent {
     onDragDrop: undefined,
     showLine: false,
     disabled: false,
-    showIcon: false,
+    showIcon: true,
     checkable: false,
     draggable: false,
     selectable: false,
@@ -100,6 +101,24 @@ export default class OCTreeView extends React.PureComponent {
     this.props.onDragDrop(newData);
   };
 
+  isChildChecked = (node, arr = []) => {
+    const { dataLookUpChildren, dataLookUpKey } = this.props;
+    const children = arr.length ? arr : node[dataLookUpChildren];
+    let found = children.find(child => this.isChecked(child[dataLookUpKey]));
+
+    if (!found) {
+      children.forEach((child) => {
+        if (child[dataLookUpChildren] && !found) {
+          found = this.isChildChecked(child, child[dataLookUpChildren]);
+        }
+      });
+    }
+    return !!found;
+  };
+
+  isChecked = key =>
+    this.props.checkedKeys.includes(key) || this.props.defaultCheckedKeys.includes(key);
+
   /* hasChildren - function */
   hasChildren = dataObject => ((dataObject[this.props.dataLookUpChildren]
     && dataObject[this.props.dataLookUpChildren].length >= 1
@@ -107,37 +126,55 @@ export default class OCTreeView extends React.PureComponent {
 
   /* renderNodes - function */
   renderNodes() {
-    const nodeKey = this.props.dataLookUpKey;
-    const nodeVal = this.props.dataLookUpValue;
-    const nodeChild = this.props.dataLookUpChildren;
+    const {
+      dataLookUpKey, dataLookUpValue, dataLookUpChildren, iconClass, disabled
+    } = this.props;
     const checkChildren = this.hasChildren;
-    const customIcon = this.props.iconClass;
 
     // Recursive function for collecting nodes:
     const mountNodes = (nodeList) => {
-      const lst = [];
+      const list = [];
       nodeList.forEach((node) => {
-        if (!node[nodeKey]) return false;
+        if (!node[dataLookUpKey]) return false;
+        // Leaf node
         if (!checkChildren(node)) {
-          lst.push( // eslint-disable-line function-paren-newline
+          list.push( // eslint-disable-line function-paren-newline
             <TreeNode
-              title={node[nodeVal]}
-              key={node[nodeKey]}
-              className={`${customIcon}`}
+              title={node[dataLookUpValue]}
+              key={node[dataLookUpKey]}
+              className={`${iconClass}`}
+              icon={
+                <CheckboxIcon
+                  checked={this.isChecked(node[dataLookUpKey])}
+                  halfChecked={false}
+                  disabled={disabled}
+                />
+              }
             />);
         } else {
-          lst.push( // eslint-disable-line function-paren-newline
+          // Parent node
+          const isHalfChecked =
+            this.isChecked(node[dataLookUpKey]) ? false : this.isChildChecked(node);
+
+          list.push( // eslint-disable-line function-paren-newline
             <TreeNode
-              title={node[nodeVal]}
-              key={node[nodeKey]}
-              className={`${customIcon}`}
+              title={node[dataLookUpValue]}
+              key={node[dataLookUpKey]}
+              className={`${iconClass}`}
+              icon={
+                <CheckboxIcon
+                  checked={this.isChecked(node[dataLookUpKey])}
+                  halfChecked={isHalfChecked}
+                  disabled={disabled}
+                />
+              }
             >
-              {mountNodes(node[nodeChild])}
+              {mountNodes(node[dataLookUpChildren])}
             </TreeNode>);
         }
         return false;
       });
-      return lst;
+      return list;
     };
     return mountNodes(this.props.treeData);
   }
