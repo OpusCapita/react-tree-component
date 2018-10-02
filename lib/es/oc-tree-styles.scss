@@ -96,7 +96,11 @@
 }
 
 .rc-tree {
-  margin-top: -3px;
+  padding: 0;
+
+  > li:first-child {
+    margin-top: 0;
+  }
   li {
     margin: 3px 0;
     span.rc-tree-checkbox {

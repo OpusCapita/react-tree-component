@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 1.3.0
 * Removed extra padding around rc-tree and made a few other adjustments
 * Renamed treeClass prop to className, so that the component will play nicely with styled-components, etc.
 
