@@ -127,7 +127,7 @@ export default class OCTreeView extends React.PureComponent {
   /* renderNodes - function */
   renderNodes() {
     const {
-      dataLookUpKey, dataLookUpValue, dataLookUpChildren, iconClass, disabled
+      dataLookUpKey, dataLookUpValue, dataLookUpChildren, iconClass, disabled,
     } = this.props;
     const checkChildren = this.hasChildren;
 
