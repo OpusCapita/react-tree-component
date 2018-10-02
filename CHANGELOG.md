@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 1.2.0
 * Added a custom Checkbox component
 * Set 'caret' as a default iconClass for "switchers"
 

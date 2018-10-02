@@ -66,16 +66,23 @@
     position: relative;
   }
 
+  .rc-tree-switcher-noop,
+  span.rc-tree-switcher_open,
+  span.rc-tree-switcher_close {
+    font-size: 18px;
+    width: 12px;
+    text-align: center;
+    margin-top: 2px;
+    margin-right: 5px;
+  }
   span.rc-tree-switcher_open:before {
-    content: "\f0da"; // caret-right
+    content: "\f0d7"; // caret-down
     font-family: "FontAwesome";
-    //position: absolute;
   }
 
   span.rc-tree-switcher_close:before {
-    content: "\f0d7"; // caret-down
+    content: "\f0da"; // caret-right
     font-family: "FontAwesome";
-    //position: absolute;
   }
 }
 
@@ -85,5 +92,21 @@
       cursor: default;
       color: inherit;
     }
+  }
+}
+
+.rc-tree {
+  margin-top: -3px;
+  li {
+    margin: 3px 0;
+    span.rc-tree-checkbox {
+      display: none;
+    }
+  }
+  .rc-tree-title {
+    margin-left: 5px;
+  }
+  .rc-tree-iconEle.rc-tree-icon__customize {
+    cursor: default;
   }
 }
