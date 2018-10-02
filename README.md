@@ -26,7 +26,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | treeId                   | string           |  defaultTree                             | Tree identifier                          |
 | treeClass                | string           |  ''                                      | Tree container custom class for styling  |
-| iconClass                | string           |  ''                                      | FontAwesome content based indicators:    |
+| iconClass                | string           |  'carets'                                | FontAwesome content based indicators:    |
 |                          |                  |  chevron                                 | nodes as chevrons                        |
 |                          |                  |  carets                                  | nodes as carets                          |
 |                          |                  |  arrow                                   | nodes as arrows                          |
