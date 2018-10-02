@@ -35,8 +35,7 @@
     "font-awesome": "4.7.0",
     "prop-types": "15.6.0",
     "react": "15 || 16",
-    "react-dom": "15 || 16",
-    "react-icons": "3.1.0"
+    "react-dom": "15 || 16"
   },
   "devDependencies": {
     "autoprefixer": "8.0.0",
@@ -101,7 +100,8 @@
     "write-file-webpack-plugin": "4.2.0"
   },
   "dependencies": {
-    "rc-tree": "1.12.7"
+    "rc-tree": "1.12.7",
+    "react-icons": "3.1.0"
   },
   "repository": {
     "type": "git",
