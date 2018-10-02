@@ -9,7 +9,7 @@ import CheckboxIcon from './checkbox-icon.component';
 export default class OCTreeView extends React.PureComponent {
   static propTypes = {
     treeId: PropTypes.string,
-    treeClass: PropTypes.string,
+    className: PropTypes.string,
     iconClass: PropTypes.string,
     defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
@@ -35,7 +35,6 @@ export default class OCTreeView extends React.PureComponent {
 
   static defaultProps = {
     treeId: 'defaultTree',
-    treeClass: '',
     iconClass: 'carets',
     defaultExpandedKeys: [],
     defaultSelectedKeys: [],
@@ -57,6 +56,7 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpChildren: 'children',
     treeData: [],
     checkedKeys: [],
+    className: '',
   };
 
 
@@ -182,9 +182,9 @@ export default class OCTreeView extends React.PureComponent {
 
   render() {
     const nodes = this.renderNodes();
-    const clsName = this.props.treeClass ? `${this.props.treeClass} oc-react-tree` : 'oc-react-tree';
+    const clsName = this.props.className ? `${this.props.className} oc-react-tree` : 'oc-react-tree';
     const {
-      treeId, treeClass, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
+      treeId, className, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
       onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable, defaultExpandAll,
       draggable, disabled,
     } = this.props;
@@ -194,7 +194,7 @@ export default class OCTreeView extends React.PureComponent {
         {!!nodes.length &&
         <Tree
           id={treeId}
-          className={treeClass}
+          className={className}
           defaultExpandedKeys={defaultExpandedKeys}
           defaultSelectedKeys={defaultSelectedKeys}
           defaultCheckedKeys={defaultCheckedKeys}

@@ -3,6 +3,9 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Removed extra padding around rc-tree and made a few other adjustments
+* Renamed treeClass prop to className, so that the component will play nicely with styled-components, etc.
+
 ## 1.2.1
 * Move react-icons from devDependencies to dependencies
 
