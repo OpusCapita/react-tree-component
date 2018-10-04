@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Checkboxes are now implemented with CSS.
 
 ## 1.3.0
 * Removed extra padding around rc-tree and made a few other adjustments
