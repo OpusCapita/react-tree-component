@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 1.3.1
 * Checkboxes are now implemented with CSS.
 
 ## 1.3.0

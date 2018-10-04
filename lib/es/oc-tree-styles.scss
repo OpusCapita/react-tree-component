@@ -96,7 +96,37 @@
 }
 
 .rc-tree {
+  $checkbox-width: 1.6rem;
   padding: 0;
+
+  li {
+    &.rc-tree-treenode-checkbox-checked > span > span {
+      .tree-checkbox:before {
+        content: "\f00c"; // check
+      }
+    }
+    &.rc-tree-treenode-checkbox-indeterminate > span > span {
+      .tree-checkbox:before {
+        content: "\f068" // minus
+      }
+    }
+  }
+  .tree-checkbox {
+    border: 1px solid #ccc;
+    height: $checkbox-width;
+    width: $checkbox-width;
+    cursor: pointer;
+    position: relative;
+    font-family: "FontAwesome";
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.disabled {
+      background-color: #EFF2F4;
+      cursor: default;
+    }
+  }
 
   > li:first-child {
     margin-top: 0;
