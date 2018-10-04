@@ -4,7 +4,7 @@ import Tree, { TreeNode } from 'rc-tree';
 import 'rc-tree/assets/index.css';
 // Override defaults rc-tree styles
 import './oc-tree-styles.scss';
-import CheckboxIcon from './checkbox-icon.component';
+import TreeCheckbox from './tree-checkbox.component';
 
 export default class OCTreeView extends React.PureComponent {
   static propTypes = {
@@ -59,10 +59,8 @@ export default class OCTreeView extends React.PureComponent {
     className: '',
   };
 
-
   onDragDrop = (e) => {
     if (!this.props.onDragDrop) throw new TypeError('onDragDrop callback is not defined');
-
     const dropKey = e.node.props.eventKey;
     const dragKey = e.dragNode.props.eventKey;
 
@@ -101,24 +99,6 @@ export default class OCTreeView extends React.PureComponent {
     this.props.onDragDrop(newData);
   };
 
-  isChildChecked = (node, arr = []) => {
-    const { dataLookUpChildren, dataLookUpKey } = this.props;
-    const children = arr.length ? arr : node[dataLookUpChildren];
-    let found = children.find(child => this.isChecked(child[dataLookUpKey]));
-
-    if (!found) {
-      children.forEach((child) => {
-        if (child[dataLookUpChildren] && !found) {
-          found = this.isChildChecked(child, child[dataLookUpChildren]);
-        }
-      });
-    }
-    return !!found;
-  };
-
-  isChecked = key =>
-    this.props.checkedKeys.includes(key) || this.props.defaultCheckedKeys.includes(key);
-
   /* hasChildren - function */
   hasChildren = dataObject => ((dataObject[this.props.dataLookUpChildren]
     && dataObject[this.props.dataLookUpChildren].length >= 1
@@ -143,31 +123,16 @@ export default class OCTreeView extends React.PureComponent {
               title={node[dataLookUpValue]}
               key={node[dataLookUpKey]}
               className={`${iconClass}`}
-              icon={
-                <CheckboxIcon
-                  checked={this.isChecked(node[dataLookUpKey])}
-                  halfChecked={false}
-                  disabled={disabled}
-                />
-              }
+              icon={<TreeCheckbox disabled={disabled} />}
             />);
         } else {
           // Parent node
-          const isHalfChecked =
-            this.isChecked(node[dataLookUpKey]) ? false : this.isChildChecked(node);
-
           list.push( // eslint-disable-line function-paren-newline
             <TreeNode
               title={node[dataLookUpValue]}
               key={node[dataLookUpKey]}
               className={`${iconClass}`}
-              icon={
-                <CheckboxIcon
-                  checked={this.isChecked(node[dataLookUpKey])}
-                  halfChecked={isHalfChecked}
-                  disabled={disabled}
-                />
-              }
+              icon={<TreeCheckbox disabled={disabled} />}
             >
               {mountNodes(node[dataLookUpChildren])}
             </TreeNode>);
