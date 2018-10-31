@@ -1,3 +1,5 @@
+@import '~@opuscapita/oc-cm-common-styles/styles/colors';
+
 /* Styling the TreeView based on OC styleguide */
 // Custom RCTree handleIcons instead of using the defaults:
 
@@ -110,9 +112,24 @@
         content: "\f068" // minus
       }
     }
+    .rc-tree-node-content-wrapper {
+      padding: 0;
+      &.draggable {
+        &:hover {
+          &:after {
+            font-family: "FontAwesome";
+            content: "\f07d"; // fa-arrows-v - vertical arrows
+            margin-left: 10px;
+            padding-right: 10px;
+            color: $oc-color-primary-azure;
+          }
+        }
+      }
+    }
   }
+
   .tree-checkbox {
-    border: 1px solid #ccc;
+    border: 1px solid $oc-color-gray;
     height: $checkbox-width;
     width: $checkbox-width;
     cursor: pointer;
@@ -123,8 +140,19 @@
     align-items: center;
     justify-content: center;
     &.disabled {
-      background-color: #EFF2F4;
+      background-color: $oc-color-select-hover;
       cursor: default;
+    }
+  }
+
+  .rc-tree-node-selected {
+    background-color: transparent;
+    border: none;
+    .rc-tree-title {
+      border: none;
+      background-color: $oc-color-site-background;
+      opacity: 1;
+      display: inline-block;
     }
   }
 
@@ -138,7 +166,7 @@
     }
   }
   .rc-tree-title {
-    margin-left: 5px;
+    padding: 0 10px;
   }
   .rc-tree-iconEle.rc-tree-icon__customize {
     cursor: default;
