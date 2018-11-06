@@ -66,12 +66,22 @@ export default class OCTreeView extends React.PureComponent {
   onDragDrop = (e) => {
     const { onDragDrop, isDragDropLegal, treeData } = this.props;
     if (!onDragDrop) throw new TypeError('onDragDrop callback is not defined');
+
+    // Calling isDragDropLegal callback to ensure that this move can be done
     if (isDragDropLegal && !isDragDropLegal(treeData, e)) return;
 
     const newData = this.getUpdatedTree(this.getTreeItem(e.dragNode.props.eventKey), e);
     onDragDrop(newData, e);
   };
 
+  /**
+   * Returns updated tree after Drag n' drop event
+   * @param dragItem - dragged item
+   * @param dragEvent - event
+   * @param array - used recursively
+   * @param parentFiltered - used recursively
+   * @returns {*}
+   */
   getUpdatedTree = (dragItem, dragEvent, array = this.props.treeData, parentFiltered = false) => {
     const { dataLookUpKey, dataLookUpChildren } = this.props;
     const { dropToGap, node } = dragEvent;
