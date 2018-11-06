@@ -18,6 +18,7 @@ export default class OCTreeView extends React.PureComponent {
     onSelect: PropTypes.func,
     onCheck: PropTypes.func,
     onDragDrop: PropTypes.func,
+    isDragDropLegal: PropTypes.func,
     showLine: PropTypes.bool,
     showIcon: PropTypes.bool,
     checkable: PropTypes.bool,
@@ -44,6 +45,7 @@ export default class OCTreeView extends React.PureComponent {
     onSelect: undefined,
     onCheck: undefined,
     onDragDrop: undefined,
+    isDragDropLegal: undefined,
     showLine: false,
     disabled: false,
     showIcon: true,
@@ -62,10 +64,12 @@ export default class OCTreeView extends React.PureComponent {
   };
 
   onDragDrop = (e) => {
-    const { onDragDrop } = this.props;
+    const { onDragDrop, isDragDropLegal, treeData } = this.props;
     if (!onDragDrop) throw new TypeError('onDragDrop callback is not defined');
+    if (isDragDropLegal && !isDragDropLegal(treeData, e)) return;
+
     const newData = this.getUpdatedTree(this.getTreeItem(e.dragNode.props.eventKey), e);
-    onDragDrop(newData);
+    onDragDrop(newData, e);
   };
 
   getUpdatedTree = (dragItem, dragEvent, array = this.props.treeData, parentFiltered = false) => {
@@ -85,7 +89,7 @@ export default class OCTreeView extends React.PureComponent {
       }
       return items;
     };
-    if (!parentFiltered) {
+    if (!parentFiltered && dragItem) {
       newItems = this.removeItem(newItems, dragItem[dataLookUpKey]);
     }
     if (dropToGap) {
@@ -95,10 +99,11 @@ export default class OCTreeView extends React.PureComponent {
     if (!found) {
       for (let i = 0; i < newItems.length; i += 1) {
         const item = newItems[i];
-        let children = item[dataLookUpChildren];
+        const children = item[dataLookUpChildren];
+
         if (!dropToGap && dropId === item[dataLookUpKey] && !found) {
           found = true;
-          if (!children) children = [];
+          if (!children) item[dataLookUpChildren] = [];
           item[dataLookUpChildren].push(dragItem);
           break;
         } else if (children && dropToGap) {

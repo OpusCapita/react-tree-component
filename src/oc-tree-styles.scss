@@ -101,6 +101,26 @@
   $checkbox-width: 1.6rem;
   padding: 0;
 
+  .rc-tree-treenode-switcher-open,
+  .rc-tree-treenode-switcher-closed {
+    &.drag-over {
+      > .rc-tree-node-content-wrapper {
+        background: $oc-color-primary-orange;
+        border: none;
+      }
+    }
+    &.drag-over-gap-bottom {
+      > .rc-tree-node-content-wrapper {
+        border-bottom: 2px solid $oc-color-primary-orange;
+      }
+    }
+    &.drag-over-gap-top {
+      > .rc-tree-node-content-wrapper {
+        border-top: 2px solid $oc-color-primary-orange;
+      }
+    }
+  }
+
   li {
     &.rc-tree-treenode-checkbox-checked > span > span {
       .tree-checkbox:before {
@@ -112,6 +132,7 @@
         content: "\f068" // minus
       }
     }
+
     .rc-tree-node-content-wrapper {
       padding: 0;
       &.draggable {
@@ -119,7 +140,7 @@
           &:after {
             font-family: "FontAwesome";
             content: "\f07d"; // fa-arrows-v - vertical arrows
-            margin-left: 10px;
+            margin-left: 20px;
             padding-right: 10px;
             color: $oc-color-primary-azure;
           }
