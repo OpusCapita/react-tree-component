@@ -101,7 +101,7 @@
   },
   "dependencies": {
     "@opuscapita/oc-cm-common-styles": "2.2.0",
-    "rc-tree": "1.12.7"
+    "rc-tree": "1.14.8"
   },
   "repository": {
     "type": "git",
