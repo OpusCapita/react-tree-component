@@ -128,7 +128,12 @@ export default class OCTreeView extends React.PureComponent {
     return newItems;
   };
 
-
+  /**
+   * Returns a tree item by ID
+   * @param id
+   * @param array - used recursively
+   * @returns {Object}
+   */
   getTreeItem = (id, array = this.props.treeData) => {
     const { dataLookUpChildren, dataLookUpKey } = this.props;
     let found = array.find(item => item[dataLookUpKey] === id);
