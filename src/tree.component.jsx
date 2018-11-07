@@ -18,6 +18,7 @@ export default class OCTreeView extends React.PureComponent {
     onSelect: PropTypes.func,
     onCheck: PropTypes.func,
     onDragDrop: PropTypes.func,
+    isDragDropLegal: PropTypes.func,
     showLine: PropTypes.bool,
     showIcon: PropTypes.bool,
     checkable: PropTypes.bool,
@@ -31,6 +32,7 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpValue: PropTypes.string,
     dataLookUpChildren: PropTypes.string,
     checkedKeys: PropTypes.arrayOf(PropTypes.string),
+    selectedKeys: PropTypes.arrayOf(PropTypes.string),
   };
 
   static defaultProps = {
@@ -43,6 +45,7 @@ export default class OCTreeView extends React.PureComponent {
     onSelect: undefined,
     onCheck: undefined,
     onDragDrop: undefined,
+    isDragDropLegal: undefined,
     showLine: false,
     disabled: false,
     showIcon: true,
@@ -56,47 +59,129 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpChildren: 'children',
     treeData: [],
     checkedKeys: [],
+    selectedKeys: [],
     className: '',
   };
 
   onDragDrop = (e) => {
-    if (!this.props.onDragDrop) throw new TypeError('onDragDrop callback is not defined');
-    const dropKey = e.node.props.eventKey;
-    const dragKey = e.dragNode.props.eventKey;
+    const { onDragDrop, isDragDropLegal, treeData } = this.props;
+    if (!onDragDrop) throw new TypeError('onDragDrop callback is not defined');
 
-    const loop = (data, key, callback) => {
-      data.forEach((item, index, arr) => {
-        if (item.key === key) return callback(item, index, arr);
-        if (item.children) return loop(item.children, key, callback);
-        return null;
-      });
+    // Calling isDragDropLegal callback to ensure that this move can be done
+    if (isDragDropLegal && !isDragDropLegal(treeData, e)) return;
+
+    const newData = this.getUpdatedTree(this.getTreeItem(e.dragNode.props.eventKey), e);
+    onDragDrop(newData, e);
+  };
+
+  /**
+   * Returns updated tree after Drag n' drop event
+   * @param dragItem - dragged item
+   * @param dragEvent - event
+   * @param array - used recursively
+   * @param parentFiltered - used recursively
+   * @returns {*}
+   */
+  getUpdatedTree = (dragItem, dragEvent, array = this.props.treeData, parentFiltered = false) => {
+    const { dataLookUpKey, dataLookUpChildren } = this.props;
+    const { dropToGap, node } = dragEvent;
+    const dropId = node && node.props.eventKey;
+    let found = false;
+    let newItems = array.slice();
+
+    const addItemToArray = (items) => {
+      const dropIndex = items.findIndex(child => child[dataLookUpKey] === dropId);
+      if (dropIndex > -1) {
+        found = true;
+        const newChildren = items.slice();
+        newChildren.splice(dropIndex, 0, dragItem);
+        return newChildren;
+      }
+      return items;
     };
-
-    const newData = this.props.treeData.slice();
-
-    let dragObj;
-    loop(newData, dragKey, (item, index, arr) => {
-      arr.splice(index, 1);
-      dragObj = item;
-    });
-
-    // .. item is dropped between 2 items
-    if (e.dropToGap) {
-      let ar;
-      let i;
-      loop(newData, dropKey, (item, index, arr) => {
-        ar = arr;
-        i = index;
-      });
-      ar.splice(i, 0, dragObj);
-    } else {
-      loop(newData, dropKey, (item) => {
-        item.children = item.children || []; // eslint-disable-line no-param-reassign
-        item.children.push(dragObj);
-      });
+    if (!parentFiltered && dragItem) {
+      newItems = this.removeItem(newItems, dragItem[dataLookUpKey]);
+    }
+    if (dropToGap) {
+      newItems = addItemToArray(newItems);
     }
 
-    this.props.onDragDrop(newData);
+    if (!found) {
+      for (let i = 0; i < newItems.length; i += 1) {
+        const item = newItems[i];
+        const children = item[dataLookUpChildren];
+
+        if (!dropToGap && dropId === item[dataLookUpKey] && !found) {
+          found = true;
+          if (!children) item[dataLookUpChildren] = [];
+          item[dataLookUpChildren].push(dragItem);
+          break;
+        } else if (children && dropToGap) {
+          item[dataLookUpChildren] = addItemToArray(children);
+        }
+        if (!found && item[dataLookUpChildren]) {
+          found = this.getUpdatedTree(dragItem, dragEvent, item[dataLookUpChildren], true);
+        }
+      }
+    }
+    if (!found) return false;
+    return newItems;
+  };
+
+  /**
+   * Returns a tree item by ID
+   * @param id
+   * @param array - used recursively
+   * @returns {Object}
+   */
+  getTreeItem = (id, array = this.props.treeData) => {
+    const { dataLookUpChildren, dataLookUpKey } = this.props;
+    let found = array.find(item => item[dataLookUpKey] === id);
+    if (!found) {
+      array.forEach((item) => {
+        if (item[dataLookUpChildren] && !found) {
+          found = this.getTreeItem(id, item[dataLookUpChildren]);
+        }
+      });
+    }
+    return found;
+  };
+
+
+  /**
+   * Remove item from given array
+   * @param array
+   * @param id
+   * @returns array of filtered items
+   */
+  removeItem = (array, id) => {
+    const { dataLookUpKey, dataLookUpChildren } = this.props;
+    let newItems = array.slice();
+    let found = false;
+    const isParent = arr => arr.find(child => child[dataLookUpKey] === id);
+    const filterChild = arr => arr.filter(child => child[dataLookUpKey] !== id);
+
+    if (isParent(newItems)) {
+      found = true;
+      newItems = filterChild(newItems);
+    }
+
+    if (!found) {
+      for (let i = 0; i < newItems.length; i += 1) {
+        const item = newItems[i];
+
+        if (item[dataLookUpChildren] && isParent(item[dataLookUpChildren])) {
+          found = true;
+          item[dataLookUpChildren] = filterChild(item[dataLookUpChildren]);
+          break;
+        }
+        if (item[dataLookUpChildren] && !found) {
+          found = this.removeItem(item[dataLookUpChildren], id);
+        }
+      }
+    }
+    if (!found) return false;
+    return newItems;
   };
 
   /* hasChildren - function */
@@ -122,7 +207,7 @@ export default class OCTreeView extends React.PureComponent {
             <TreeNode
               title={node[dataLookUpValue]}
               key={node[dataLookUpKey]}
-              className={`${iconClass}`}
+              className={`${iconClass} leaf-node`}
               icon={<TreeCheckbox disabled={disabled} />}
             />);
         } else {
@@ -131,7 +216,7 @@ export default class OCTreeView extends React.PureComponent {
             <TreeNode
               title={node[dataLookUpValue]}
               key={node[dataLookUpKey]}
-              className={`${iconClass}`}
+              className={`${iconClass} parent-node`}
               icon={<TreeCheckbox disabled={disabled} />}
             >
               {mountNodes(node[dataLookUpChildren])}
@@ -148,10 +233,11 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const clsName = this.props.className ? `${this.props.className} oc-react-tree` : 'oc-react-tree';
+
     const {
       treeId, className, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
       onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable, defaultExpandAll,
-      draggable, disabled,
+      draggable, disabled, selectedKeys,
     } = this.props;
 
     return (
@@ -170,6 +256,7 @@ export default class OCTreeView extends React.PureComponent {
           showLine={showLine}
           showIcon={showIcon}
           checkable={checkable}
+          selectedKeys={selectedKeys}
           selectable={selectable}
           disabled={disabled}
           draggable={draggable}

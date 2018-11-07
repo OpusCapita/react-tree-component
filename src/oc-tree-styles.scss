@@ -1,3 +1,5 @@
+@import '~@opuscapita/oc-cm-common-styles/styles/colors';
+
 /* Styling the TreeView based on OC styleguide */
 // Custom RCTree handleIcons instead of using the defaults:
 
@@ -99,6 +101,7 @@
   $checkbox-width: 1.6rem;
   padding: 0;
 
+
   li {
     &.rc-tree-treenode-checkbox-checked > span > span {
       .tree-checkbox:before {
@@ -110,9 +113,42 @@
         content: "\f068" // minus
       }
     }
+
+    .rc-tree-node-content-wrapper {
+      padding: 0;
+      &.draggable {
+        &:hover {
+          &:after {
+            font-family: "FontAwesome";
+            content: "\f07d"; // fa-arrows-v - vertical arrows
+            margin-left: 20px;
+            padding-right: 10px;
+            color: $oc-color-primary-azure;
+          }
+        }
+      }
+    }
+    
+    &.drag-over {
+      > .draggable {
+        background: $oc-color-primary-orange;
+        border: none;
+      }
+    }
+    &.drag-over-gap-bottom {
+      > .draggable {
+        border-bottom: 2px solid $oc-color-primary-orange;
+      }
+    }
+    &.drag-over-gap-top {
+      > .draggable {
+        border-top: 2px solid $oc-color-primary-orange;
+      }
+    }
   }
+
   .tree-checkbox {
-    border: 1px solid #ccc;
+    border: 1px solid $oc-color-gray;
     height: $checkbox-width;
     width: $checkbox-width;
     cursor: pointer;
@@ -123,8 +159,19 @@
     align-items: center;
     justify-content: center;
     &.disabled {
-      background-color: #EFF2F4;
+      background-color: $oc-color-select-hover;
       cursor: default;
+    }
+  }
+
+  .rc-tree-node-selected {
+    background-color: transparent;
+    border: none;
+    .rc-tree-title {
+      border: none;
+      background-color: $oc-color-site-background;
+      opacity: 1;
+      display: inline-block;
     }
   }
 
@@ -138,7 +185,7 @@
     }
   }
   .rc-tree-title {
-    margin-left: 5px;
+    padding: 0 10px;
   }
   .rc-tree-iconEle.rc-tree-icon__customize {
     cursor: default;
