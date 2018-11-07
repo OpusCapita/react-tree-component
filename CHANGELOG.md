@@ -2,7 +2,7 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
-## <next>
+## 1.4.0
 * Rewrote the whole drag n' drop functionality. Hopefully it works better now.
 * Some CSS fixes. The Tree is now using `oc-cm-common-styles` library
 * A couple of new props (`selectedKeys` && `isDragDropLegal`)
