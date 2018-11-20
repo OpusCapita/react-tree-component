@@ -38,8 +38,6 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onCheck                  | Function         |  () => {}                                | Handling the item checked                |
 | onDragDrop               | Function         |  () => {}                                | Fires when item is dragged and dropped   |
 | isDragDropLegal          | Function         |  undefined                               | This callback is executed before completing drag n' drop action. Function should return a bool   |
-
-|                          |                  |                                          | Takes 'checkedKeys' and info' (event object to get node) as parameter ```jsx onCheck (chkKeys, info) { console.log(chkKeys, info); }                                ``` |
 | showLine                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | checkable                | Boolean          |  false                                   | Whether show or hide checkboxes from tree|
@@ -54,6 +52,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
 | dataLookUpChildren       | String           | 'children'                               | Data item property to identifiy subitems |
 | selectedKeys             | Array            | []                                       | Array of selected item (ids) |
+| deselectOnContainerClick | Boolean          | true                                     | Deselects all selected keys when not clicking on any particular item |
 
 ### Code example
 ```jsx

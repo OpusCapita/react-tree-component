@@ -33,6 +33,8 @@ export default class OCTreeView extends React.PureComponent {
     dataLookUpChildren: PropTypes.string,
     checkedKeys: PropTypes.arrayOf(PropTypes.string),
     selectedKeys: PropTypes.arrayOf(PropTypes.string),
+    expandedKeys: PropTypes.arrayOf(PropTypes.string),
+    deselectOnContainerClick: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -60,7 +62,17 @@ export default class OCTreeView extends React.PureComponent {
     treeData: [],
     checkedKeys: [],
     selectedKeys: [],
+    expandedKeys: [],
     className: '',
+    deselectOnContainerClick: true,
+  };
+
+  onContainerClick = (e) => {
+    const { onSelect, deselectOnContainerClick } = this.props;
+    // clicking outside item
+    if (deselectOnContainerClick && e.target.tagName !== 'SPAN') {
+      onSelect([]);
+    }
   };
 
   onDragDrop = (e) => {
@@ -237,11 +249,11 @@ export default class OCTreeView extends React.PureComponent {
     const {
       treeId, className, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
       onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable, defaultExpandAll,
-      draggable, disabled, selectedKeys,
+      draggable, disabled, selectedKeys, expandedKeys,
     } = this.props;
 
     return (
-      <div id="tree-view-container" className={clsName}>
+      <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
         {!!nodes.length &&
         <Tree
           id={treeId}
@@ -250,18 +262,19 @@ export default class OCTreeView extends React.PureComponent {
           defaultSelectedKeys={defaultSelectedKeys}
           defaultCheckedKeys={defaultCheckedKeys}
           checkedKeys={checkedKeys}
+          selectedKeys={selectedKeys}
+          expandedKeys={expandedKeys}
           onExpand={onExpand}
           onSelect={onSelect}
           onCheck={onCheck}
+          onDrop={this.onDragDrop}
+          checkable={checkable}
+          selectable={selectable}
+          draggable={draggable}
           showLine={showLine}
           showIcon={showIcon}
-          checkable={checkable}
-          selectedKeys={selectedKeys}
-          selectable={selectable}
           disabled={disabled}
-          draggable={draggable}
           defaultExpandAll={defaultExpandAll}
-          onDrop={this.onDragDrop}
         >
           {nodes}
         </Tree>

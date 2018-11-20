@@ -128,7 +128,7 @@
         }
       }
     }
-    
+
     &.drag-over {
       > .draggable {
         background: $oc-color-primary-orange;
@@ -185,7 +185,7 @@
     }
   }
   .rc-tree-title {
-    padding: 0 10px;
+    padding: 0 5px;
   }
   .rc-tree-iconEle.rc-tree-icon__customize {
     cursor: default;

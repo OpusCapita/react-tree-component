@@ -1,6 +1,9 @@
 # Changelog
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
+## 1.5.0
+* Added `deselectOnContainerClick` prop
+* Fixed README
 
 ## 1.4.0
 * Rewrote the whole drag n' drop functionality. Hopefully it works better now.
