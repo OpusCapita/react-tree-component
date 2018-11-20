@@ -115,7 +115,7 @@ export const AllTrueWithChevronConfig = {
   tree: {
     treeId: 'ChevronIndicatorsAllTrueTreeViewExample',
     checkable: 'true',
-    selectable: 'true',
+    selectable: 'false',
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'true',
@@ -131,7 +131,7 @@ export const AllTrueDefaultConfig = {
   tree: {
     treeId: 'AllTrueTreeViewExample',
     checkable: 'true',
-    selectable: 'true',
+    selectable: 'false',
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'true',
@@ -146,7 +146,7 @@ export const NoIconDefaultConfig = {
   tree: {
     treeId: 'NoIconTreeViewExample',
     checkable: 'true',
-    selectable: 'true',
+    selectable: 'false',
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'false',
@@ -161,7 +161,7 @@ export const DefaultSelectedKeysConfig = {
   tree: {
     treeId: 'NoIconTreeViewExample',
     checkable: 'true',
-    selectable: 'true',
+    selectable: 'false',
     defaultExpandAll: 'true',
     showLine: 'true',
     showIcon: 'false',
@@ -201,7 +201,7 @@ export const DraggableConfig = {
   tree: {
     treeId: 'PlainTreeViewExample',
     checkable: 'true',
-    selectable: 'true',
+    selectable: 'false',
     defaultExpandAll: 'true',
     disabled: 'false',
     draggable: 'true',

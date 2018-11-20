@@ -26,22 +26,23 @@ export default class BaseTree extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    const checkedKeys = props.tree.defaultCheckedKeys;
     this.state = {
-      defaultCheckedKeys: checkedKeys,
-      defaultExpandedKeys: [],
-      defaultSelectedKeys: [],
+      checkedKeys: [],
+      expandedKeys: [],
+      selectedKeys: [],
     };
   }
 
-  treeViewOnSelect = (selectedKeys, info) => {
-    this.selKey = info.node.props.eventKey;
+  treeViewOnExpand = (expandedKeys) => {
+    this.setState({ expandedKeys });
   };
 
-  treeViewOnCheck = (keys) => {
-    this.setState({
-      checkedKeys: keys,
-    });
+  treeViewOnSelect = (selectedKeys) => {
+    this.setState({ selectedKeys });
+  };
+
+  treeViewOnCheck = (checkedKeys) => {
+    this.setState({ checkedKeys });
   };
 
   treeViewOnDragDrop = (newItems) => {
@@ -101,14 +102,13 @@ export default class BaseTree extends React.PureComponent {
             <OCTreeView
               treeId={tree.treeId}
               treeData={modifiedTreeData}
-              defaultExpandedKeys={this.state.defaultExpandedKeys}
-              defaultSelectedKeys={tree.defaultSelectedKeys || this.state.defaultSelectedKeys}
-              defaultCheckedKeys={this.state.defaultCheckedKeys}
               onExpand={this.treeViewOnExpand}
               onSelect={this.treeViewOnSelect}
               onCheck={this.treeViewOnCheck}
               onDragDrop={this.treeViewOnDragDrop}
               checkedKeys={this.state.checkedKeys}
+              selectedKeys={this.state.selectedKeys}
+              expandedKeys={this.state.expandedKeys}
               iconClass={tree.iconClass || null}
               checkable={isCheckable}
               selectable={isSelectable}
