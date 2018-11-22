@@ -253,6 +253,7 @@ export default class OCTreeView extends React.PureComponent {
     } = this.props;
 
     return (
+      // eslint-disable-next-line
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
         {!!nodes.length &&
         <Tree
