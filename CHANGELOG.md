@@ -2,7 +2,7 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
-* Added expand all toggle and`showExpandAll`  & `title` props
+* Added expand all toggle and `showExpandAll`, `headerRight`  & `title` props
 
 ## 1.5.0
 * Added `deselectOnContainerClick` prop

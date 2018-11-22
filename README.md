@@ -57,6 +57,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | deselectOnContainerClick | Boolean          | true                                     | Deselects all selected keys when not clicking on any particular item |
 | showExpandAll            | Boolean          | false                                    | Show expand all toggle |
 | title                    | String           | undefined                                | Tree title |
+| headerRight              | Node             | undefined                                | Content displayed on the right side of the header |
 
 ### Code example
 ```jsx

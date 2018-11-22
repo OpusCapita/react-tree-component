@@ -38,6 +38,7 @@ export default class OCTreeView extends React.PureComponent {
     deselectOnContainerClick: PropTypes.bool,
     showExpandAll: PropTypes.bool,
     title: PropTypes.string,
+    headerRight: PropTypes.node,
   };
 
   static defaultProps = {
@@ -70,6 +71,7 @@ export default class OCTreeView extends React.PureComponent {
     deselectOnContainerClick: true,
     showExpandAll: false,
     title: undefined,
+    headerRight: undefined,
   };
 
   constructor(props) {
@@ -301,7 +303,7 @@ export default class OCTreeView extends React.PureComponent {
     const {
       treeId, className, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
       onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable,
-      draggable, disabled, selectedKeys, showExpandAll, title,
+      draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
     } = this.props;
     const clsName = className ? `${className} oc-react-tree` : 'oc-react-tree';
     const expandAllClsName = this.isAllExpanded() ? 'expand-all' : '';
@@ -309,12 +311,15 @@ export default class OCTreeView extends React.PureComponent {
     return (
       // eslint-disable-next-line
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
-        {(showExpandAll || title) &&
-        <div className="title-container">
+
+        {(showExpandAll || title || headerRight) &&
+        <header className="title-container">
           {showExpandAll &&
           <button onClick={this.onExpandAllClick} className={`expand-all-toggle ${expandAllClsName}`} />}
           {title && <h2>{title}</h2>}
-        </div>}
+          {headerRight && <div className="header-right">{headerRight}</div>}
+        </header>}
+
         {!!nodes.length &&
         <Tree
           id={treeId}
