@@ -85,6 +85,8 @@ export default class BaseTree extends React.PureComponent {
     const lookUpValue = tree.dataLookUpValue || 'parent';
     const children = tree.dataLookUpChildren || 'children';
     const modifiedTreeData = this.state.treeData || treeData;
+    const showExpandAll = (tree.showExpandAll === 'true');
+    const title = tree.title;
 
     return (
       <div id="plain-tree-example-container">
@@ -114,12 +116,14 @@ export default class BaseTree extends React.PureComponent {
               selectable={isSelectable}
               draggable={isDraggable}
               defaultExpandAll={expandAll}
+              showExpandAll={showExpandAll}
               showIcon={showIcon}
               showLine={showLine}
               dataLookUpKey={lookUpKey}
               dataLookUpValue={lookUpValue}
               dataLookUpChildren={children}
               disabled={disabled}
+              title={title}
             />
           </div>
         </div>

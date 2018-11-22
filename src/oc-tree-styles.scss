@@ -101,7 +101,6 @@
   $checkbox-width: 1.6rem;
   padding: 0;
 
-
   li {
     &.rc-tree-treenode-checkbox-checked > span > span {
       .tree-checkbox:before {
@@ -189,5 +188,44 @@
   }
   .rc-tree-iconEle.rc-tree-icon__customize {
     cursor: default;
+  }
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .expand-all-toggle {
+    background: none;
+    border: none;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    margin-left: 3px;
+    &:focus {
+      box-shadow: none;
+    }
+    &:before {
+      position: absolute;
+      font-family: "FontAwesome";
+      font-size: 18px;
+      top: 0;
+      left: 0;
+    }
+
+    &.expand-all {
+      &:before {
+        content: "\f0d7"; // caret-down
+        left: -2px;
+      }
+    }
+    &:before {
+      content: "\f0da"; // caret-right
+    }
   }
 }

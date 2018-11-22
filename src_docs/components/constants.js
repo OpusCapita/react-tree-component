@@ -46,6 +46,7 @@ export const PlainTreeConfig = {
     selectable: 'true',
     defaultExpandAll: 'true',
     disabled: 'false',
+    title: 'Plain TreeView',
   },
 };
 
@@ -75,6 +76,7 @@ export const ChevronConfig = {
     showIcon: 'false',
     iconClass: 'chevron',
     disabled: 'false',
+    showExpandAll: 'true',
   },
 };
 
@@ -105,6 +107,8 @@ export const CaretConfig = {
     defaultExpandAll: 'true',
     iconClass: 'carets',
     disabled: 'false',
+    showExpandAll: 'true',
+    title: 'Expand all visible',
   },
 };
 
@@ -191,6 +195,7 @@ export const CustomLookUpConfig = {
     dataLookUpValue: 'name',
     dataLookUpChildren: 'subRights',
     disabled: 'true',
+    title: 'TreeView',
   },
 };
 
@@ -205,5 +210,6 @@ export const DraggableConfig = {
     defaultExpandAll: 'true',
     disabled: 'false',
     draggable: 'true',
+    showExpandAll: 'true',
   },
 };
