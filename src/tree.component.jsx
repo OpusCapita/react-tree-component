@@ -95,7 +95,7 @@ export default class OCTreeView extends React.PureComponent {
   onContainerClick = (e) => {
     const { onSelect, deselectOnContainerClick } = this.props;
     // clicking outside item
-    if (deselectOnContainerClick && e.target.tagName !== 'SPAN') {
+    if (deselectOnContainerClick && e.target.tagName !== 'SPAN' && !this.header.contains(e.target)) {
       onSelect([]);
     }
   };
@@ -313,7 +313,12 @@ export default class OCTreeView extends React.PureComponent {
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
 
         {(showExpandAll || title || headerRight) &&
-        <header className="title-container">
+        <header
+          className="title-container"
+          ref={(el) => {
+            this.header = el;
+          }}
+        >
           {showExpandAll &&
           <button onClick={this.onExpandAllClick} className={`expand-all-toggle ${expandAllClsName}`} />}
           {title && <h2>{title}</h2>}

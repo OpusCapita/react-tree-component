@@ -2,6 +2,7 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+* Item shouldn't get deselected when clicking on the header. This is now fixed.
 
 ## 1.6.0
 * Added expand all toggle and `showExpandAll`, `headerRight`  & `title` props
