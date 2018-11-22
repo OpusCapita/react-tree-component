@@ -125,6 +125,8 @@ export const AllTrueWithChevronConfig = {
     showIcon: 'true',
     iconClass: 'chevron',
     disabled: 'false',
+    showExpandAll: 'true',
+    headerRight: 'Some custom content here',
   },
 };
 

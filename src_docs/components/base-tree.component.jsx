@@ -87,6 +87,7 @@ export default class BaseTree extends React.PureComponent {
     const modifiedTreeData = this.state.treeData || treeData;
     const showExpandAll = (tree.showExpandAll === 'true');
     const title = tree.title;
+    const headerRight = tree.headerRight;
 
     return (
       <div id="plain-tree-example-container">
@@ -124,6 +125,7 @@ export default class BaseTree extends React.PureComponent {
               dataLookUpChildren={children}
               disabled={disabled}
               title={title}
+              headerRight={headerRight}
             />
           </div>
         </div>
