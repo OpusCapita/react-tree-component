@@ -51,7 +51,9 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | dataLookUpKey            | String           | 'key'                                    | Unique identifier of data item.          |
 | dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
 | dataLookUpChildren       | String           | 'children'                               | Data item property to identifiy subitems |
-| selectedKeys             | Array            | []                                       | Array of selected item (ids) |
+| checkedKeys              | Array            | []                                       | Array of checked items (ids) |
+| expandedKeys             | Array            | []                                       | Array of expanded items (ids) |
+| selectedKeys             | Array            | []                                       | Array of selected items (ids) |
 | deselectOnContainerClick | Boolean          | true                                     | Deselects all selected keys when not clicking on any particular item |
 
 ### Code example
