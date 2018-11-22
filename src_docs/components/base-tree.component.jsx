@@ -86,8 +86,7 @@ export default class BaseTree extends React.PureComponent {
     const children = tree.dataLookUpChildren || 'children';
     const modifiedTreeData = this.state.treeData || treeData;
     const showExpandAll = (tree.showExpandAll === 'true');
-    const title = tree.title;
-    const headerRight = tree.headerRight;
+    const { headerRight, title } = tree;
 
     return (
       <div id="plain-tree-example-container">
