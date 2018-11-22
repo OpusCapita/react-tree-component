@@ -2,6 +2,8 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+
+## 1.6.0
 * Added expand all toggle and `showExpandAll`, `headerRight`  & `title` props
 
 ## 1.5.0
