@@ -1,6 +1,11 @@
 # Changelog
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
+## <next>
+* Added `deselectOnContainerClick` prop
+* Fixed README
+* Fixed examples
+* Fixed package name to `react-tree-component`
 
 ## 1.4.0
 * Rewrote the whole drag n' drop functionality. Hopefully it works better now.
