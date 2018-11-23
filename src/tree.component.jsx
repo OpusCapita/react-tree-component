@@ -207,7 +207,7 @@ export default class OCTreeView extends React.PureComponent {
    * @returns {boolean}
    */
   isAllExpanded = () =>
-    this.state.expandedKeys.length === this.getAllParentIds().length;
+    this.state.expandedKeys && this.state.expandedKeys.length === this.getAllParentIds().length;
 
 
   /**
