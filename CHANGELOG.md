@@ -3,6 +3,9 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
 
+## 2.0.1
+* Hotfix: `expandedKeys` default value from `[]` to undefined.
+
 ## 2.0.0
 * Item shouldn't get deselected when clicking on the header. This is now fixed.
 * Removed `defaultExpandedKeys`, `defaultSelectedKeys` and `defaultCheckedKeys` props. You can achieve the same result with `expandedKeys`, `selectedKeys` and `checkedKeys`.

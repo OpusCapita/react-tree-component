@@ -60,7 +60,7 @@ export default class OCTreeView extends React.PureComponent {
     treeData: [],
     checkedKeys: [],
     selectedKeys: [],
-    expandedKeys: [],
+    expandedKeys: undefined,
     className: '',
     deselectOnContainerClick: true,
     showExpandAll: false,
