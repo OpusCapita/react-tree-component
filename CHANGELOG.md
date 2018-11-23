@@ -2,6 +2,8 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+* Added `@opuscapita/react-perfect-scrollbar` around tree
+* Made some changes on how nodes are expanded. Now it's not necessary to provide external `onExpand` callback in most of the cases.
 
 ## 2.0.1
 * Hotfix: `expandedKeys` default value from `[]` to undefined.

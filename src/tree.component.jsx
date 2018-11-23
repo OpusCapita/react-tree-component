@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
+import PerfectScrollBar from '@opuscapita/react-perfect-scrollbar';
 import 'rc-tree/assets/index.css';
 
 // Override defaults rc-tree styles
@@ -60,7 +61,7 @@ export default class OCTreeView extends React.PureComponent {
     treeData: [],
     checkedKeys: [],
     selectedKeys: [],
-    expandedKeys: undefined,
+    expandedKeys: [],
     className: '',
     deselectOnContainerClick: true,
     showExpandAll: false,
@@ -94,6 +95,13 @@ export default class OCTreeView extends React.PureComponent {
     }
   };
 
+  onExpand = (expandedKeys) => {
+    const { onExpand } = this.props;
+    this.setState({ expandedKeys }, () => {
+      if (onExpand) onExpand(this.state.expandedKeys);
+    });
+  };
+
   onDragDrop = (e) => {
     const { onDragDrop, isDragDropLegal, treeData } = this.props;
     if (!onDragDrop) throw new TypeError('onDragDrop callback is not defined');
@@ -112,6 +120,7 @@ export default class OCTreeView extends React.PureComponent {
       if (onExpand) onExpand(this.state.expandedKeys);
     });
   };
+
   /**
    * Returns updated tree after Drag n' drop event
    * @param dragItem - dragged item
@@ -184,6 +193,7 @@ export default class OCTreeView extends React.PureComponent {
     }
     return found;
   };
+
 
   /**
    * Returns all parent IDs in the tree
@@ -295,8 +305,8 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const {
-      treeId, className, checkedKeys, onExpand, onSelect, onCheck, showLine, showIcon,
-      checkable, selectable, draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
+      treeId, className, checkedKeys, onSelect, onCheck, showLine, showIcon, checkable, selectable,
+      draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
     } = this.props;
     const clsName = className ? `${className} oc-react-tree` : 'oc-react-tree';
     const expandAllClsName = this.isAllExpanded() ? 'expand-all' : '';
@@ -317,27 +327,28 @@ export default class OCTreeView extends React.PureComponent {
           {title && <h2>{title}</h2>}
           {headerRight && <div className="header-right">{headerRight}</div>}
         </header>}
-
         {!!nodes.length &&
-        <Tree
-          id={treeId}
-          className={className}
-          checkedKeys={checkedKeys}
-          selectedKeys={selectedKeys}
-          expandedKeys={this.state.expandedKeys}
-          onExpand={onExpand}
-          onSelect={onSelect}
-          onCheck={onCheck}
-          onDrop={this.onDragDrop}
-          checkable={checkable}
-          selectable={selectable}
-          draggable={draggable}
-          showLine={showLine}
-          showIcon={showIcon}
-          disabled={disabled}
-        >
-          {nodes}
-        </Tree>
+        <PerfectScrollBar>
+          <Tree
+            id={treeId}
+            className={className}
+            checkedKeys={checkedKeys}
+            selectedKeys={selectedKeys}
+            expandedKeys={this.state.expandedKeys}
+            onExpand={this.onExpand}
+            onSelect={onSelect}
+            onCheck={onCheck}
+            onDrop={this.onDragDrop}
+            checkable={checkable}
+            selectable={selectable}
+            draggable={draggable}
+            showLine={showLine}
+            showIcon={showIcon}
+            disabled={disabled}
+          >
+            {nodes}
+          </Tree>
+        </PerfectScrollBar>
         }
       </div>
     );
