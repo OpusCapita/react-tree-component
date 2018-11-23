@@ -12,9 +12,6 @@ export default class OCTreeView extends React.PureComponent {
     treeId: PropTypes.string,
     className: PropTypes.string,
     iconClass: PropTypes.string,
-    defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultCheckedKeys: PropTypes.arrayOf(PropTypes.string),
     onExpand: PropTypes.func,
     onSelect: PropTypes.func,
     onCheck: PropTypes.func,
@@ -44,9 +41,6 @@ export default class OCTreeView extends React.PureComponent {
   static defaultProps = {
     treeId: 'defaultTree',
     iconClass: 'carets',
-    defaultExpandedKeys: [],
-    defaultSelectedKeys: [],
-    defaultCheckedKeys: [],
     onExpand: undefined,
     onSelect: undefined,
     onCheck: undefined,
@@ -77,7 +71,7 @@ export default class OCTreeView extends React.PureComponent {
   constructor(props) {
     super();
     const expandedKeys = props.defaultExpandAll ?
-      this.getAllParentIds(props.treeData, props) : props.defaultExpandedKeys;
+      this.getAllParentIds(props.treeData, props) : props.expandedKeys;
 
     this.state = {
       expandedKeys,
@@ -95,7 +89,7 @@ export default class OCTreeView extends React.PureComponent {
   onContainerClick = (e) => {
     const { onSelect, deselectOnContainerClick } = this.props;
     // clicking outside item
-    if (deselectOnContainerClick && e.target.tagName !== 'SPAN') {
+    if (deselectOnContainerClick && e.target.tagName !== 'SPAN' && !this.header.contains(e.target)) {
       onSelect([]);
     }
   };
@@ -301,9 +295,8 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const {
-      treeId, className, defaultExpandedKeys, defaultSelectedKeys, defaultCheckedKeys, checkedKeys,
-      onExpand, onSelect, onCheck, showLine, showIcon, checkable, selectable,
-      draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
+      treeId, className, checkedKeys, onExpand, onSelect, onCheck, showLine, showIcon,
+      checkable, selectable, draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
     } = this.props;
     const clsName = className ? `${className} oc-react-tree` : 'oc-react-tree';
     const expandAllClsName = this.isAllExpanded() ? 'expand-all' : '';
@@ -313,7 +306,12 @@ export default class OCTreeView extends React.PureComponent {
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
 
         {(showExpandAll || title || headerRight) &&
-        <header className="title-container">
+        <header
+          className="title-container"
+          ref={(el) => {
+            this.header = el;
+          }}
+        >
           {showExpandAll &&
           <button onClick={this.onExpandAllClick} className={`expand-all-toggle ${expandAllClsName}`} />}
           {title && <h2>{title}</h2>}
@@ -324,9 +322,6 @@ export default class OCTreeView extends React.PureComponent {
         <Tree
           id={treeId}
           className={className}
-          defaultExpandedKeys={defaultExpandedKeys}
-          defaultSelectedKeys={defaultSelectedKeys}
-          defaultCheckedKeys={defaultCheckedKeys}
           checkedKeys={checkedKeys}
           selectedKeys={selectedKeys}
           expandedKeys={this.state.expandedKeys}
