@@ -30,9 +30,6 @@ Also you need to configure sass loader, since all the styles are in sass format.
 |                          |                  |  chevron                                 | nodes as chevrons                        |
 |                          |                  |  carets                                  | nodes as carets                          |
 |                          |                  |  arrow                                   | nodes as arrows                          |
-| defaultExpandedKeys      | Array            |  []                                      | Array of item ids to expand by default   |
-| defaultSelectedKeys      | Array            |  []                                      | Array of item ids selected by default    |
-| defaultCheckedKeys       | Array            |  []                                      | Array of item ids checked by default     |
 | onExpand                 | Function         |  () => {}                                | Handling the node expand. Takes 'expandedKeys' as parameter ```jsx onExpand(expKeys) { console.log(expKeys, arguments); }                                ```|
 | onSelect                 | Function         |  () => {}                                | Handling the item select. Takes 'selectedKeys' and 'info' (event object to get node)as parameter ```jsx onSelect(selKeys, info) { console.log(selKeys, info); }                        ```|
 | onCheck                  | Function         |  () => {}                                | Handling the item checked                |

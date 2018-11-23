@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
 * Item shouldn't get deselected when clicking on the header. This is now fixed.
+* Removed `defaultExpandedKeys`, `defaultSelectedKeys` and `defaultCheckedKeys` props. You can achieve the same result with `expandedKeys`, `selectedKeys` and `checkedKeys`.
 
 ## 1.6.0
 * Added expand all toggle and `showExpandAll`, `headerRight`  & `title` props
