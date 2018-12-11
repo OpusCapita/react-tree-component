@@ -34,7 +34,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onSelect                 | Function         |  () => {}                                | Handling the item select. Takes 'selectedKeys' and 'info' (event object to get node)as parameter ```jsx onSelect(selKeys, info) { console.log(selKeys, info); }                        ```|
 | onCheck                  | Function         |  () => {}                                | Handling the item checked                |
 | onDragDrop               | Function         |  () => {}                                | Fires when item is dragged and dropped   |
-| onOrderButtonClick       | Function         |  undefined                               | Fires when reorder arrows are clicked   |
+| onOrderButtonClick       | Function         |  undefined                               | Fires when ordering arrows are clicked   |
 | isDragDropLegal          | Function         |  undefined                               | This callback is executed before completing drag n' drop action. Function should return a bool   |
 | showLine                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
@@ -56,7 +56,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | showExpandAll            | Boolean          | false                                    | Show expand all toggle |
 | title                    | String           | undefined                                | Tree title |
 | headerRight              | Node             | undefined                                | Content displayed on the right side of the header |
-| showOrderingArrows       | Boolean          | false                                    | Shows arrows for reordering the tree items. If you don't want to use drag n' drop)
+| showOrderingArrows       | Boolean          | false                                    | Shows arrows for reordering the tree items. (if you don't want to use (flawed) drag n' drop)
 
 ### Code example
 ```jsx
