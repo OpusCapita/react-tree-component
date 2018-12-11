@@ -7,6 +7,7 @@ import 'rc-tree/assets/index.css';
 // Override defaults rc-tree styles
 import './oc-tree-styles.scss';
 import TreeCheckbox from './tree-checkbox.component';
+import OrderingArrows from './tree-ordering-arrows.component';
 
 export default class OCTreeView extends React.PureComponent {
   static propTypes = {
@@ -17,6 +18,7 @@ export default class OCTreeView extends React.PureComponent {
     onSelect: PropTypes.func,
     onCheck: PropTypes.func,
     onDragDrop: PropTypes.func,
+    onOrderButtonClick: PropTypes.func,
     isDragDropLegal: PropTypes.func,
     showLine: PropTypes.bool,
     showIcon: PropTypes.bool,
@@ -46,6 +48,7 @@ export default class OCTreeView extends React.PureComponent {
     onSelect: undefined,
     onCheck: undefined,
     onDragDrop: undefined,
+    onOrderButtonClick: undefined,
     isDragDropLegal: undefined,
     showLine: false,
     disabled: false,
@@ -121,6 +124,13 @@ export default class OCTreeView extends React.PureComponent {
     });
   };
 
+  getSelectedParent = () => {
+    const { selectedKeys, treeData } = this.props;
+    const id = selectedKeys[0];
+    const parent = this.getTreeItem(id, treeData, true);
+    return parent || treeData;
+  };
+
   /**
    * Returns updated tree after Drag n' drop event
    * @param dragItem - dragged item
@@ -178,22 +188,26 @@ export default class OCTreeView extends React.PureComponent {
   /**
    * Returns a tree item by ID
    * @param id
-   * @param array - used recursively
-   * @returns {Object}
+   * @param array
+   * @param returnParent - return item's parent instead of the item
+   * @param parent - parent item (used recursively)
+   * @returns {{}}
    */
-  getTreeItem = (id, array = this.props.treeData) => {
+  getTreeItem = (id, array = this.props.treeData, returnParent = false, parent = null) => {
     const { dataLookUpChildren, dataLookUpKey } = this.props;
     let found = array.find(item => item[dataLookUpKey] === id);
+
+    if (found && returnParent) found = parent;
+
     if (!found) {
       array.forEach((item) => {
         if (item[dataLookUpChildren] && !found) {
-          found = this.getTreeItem(id, item[dataLookUpChildren]);
+          found = this.getTreeItem(id, item[dataLookUpChildren], returnParent, item);
         }
       });
     }
     return found;
   };
-
 
   /**
    * Returns all parent IDs in the tree
@@ -305,8 +319,9 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const {
-      treeId, className, checkedKeys, onSelect, onCheck, showLine, showIcon, checkable, selectable,
-      draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
+      treeId, className, checkedKeys, onExpand, onSelect, onCheck, showLine, showIcon,
+      checkable, selectable, draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
+      showOrderingArrows, onOrderButtonClick,
     } = this.props;
     const clsName = className ? `${className} oc-react-tree` : 'oc-react-tree';
     const expandAllClsName = this.isAllExpanded() ? 'expand-all' : '';
@@ -315,7 +330,7 @@ export default class OCTreeView extends React.PureComponent {
       // eslint-disable-next-line
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
 
-        {(showExpandAll || title || headerRight) &&
+        {(showExpandAll || title || headerRight || showOrderingArrows) &&
         <header
           className="title-container"
           ref={(el) => {
@@ -323,8 +338,17 @@ export default class OCTreeView extends React.PureComponent {
           }}
         >
           {showExpandAll &&
-          <button onClick={this.onExpandAllClick} className={`expand-all-toggle ${expandAllClsName}`} />}
+          <button
+            onClick={this.onExpandAllClick}
+            className={`expand-all-toggle ${expandAllClsName}`}
+          />}
           {title && <h2>{title}</h2>}
+          {showOrderingArrows &&
+          <OrderingArrows
+            onOrderButtonClick={onOrderButtonClick}
+            selectedParent={this.getSelectedParent()}
+            {...this.props}
+          />}
           {headerRight && <div className="header-right">{headerRight}</div>}
         </header>}
         {!!nodes.length &&
