@@ -50,7 +50,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | dataLookUpValue          | String           | 'parent'                                 | Representative value of data item.       |
 | dataLookUpChildren       | String           | 'children'                               | Data item property to identifiy subitems |
 | checkedKeys              | Array            | []                                       | Array of checked items (ids) |
-| expandedKeys             | Array            | undefined                                | Array of expanded items (ids) |
+| expandedKeys             | Array            | []                                       | Array of expanded items (ids) |
 | selectedKeys             | Array            | []                                       | Array of selected items (ids) |
 | deselectOnContainerClick | Boolean          | true                                     | Deselects all selected keys when not clicking on any particular item |
 | showExpandAll            | Boolean          | false                                    | Show expand all toggle |

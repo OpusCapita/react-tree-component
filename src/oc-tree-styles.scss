@@ -13,9 +13,6 @@
 // chevron-up: "\f077"        ^
 // chevron-down: "\f078"      v
 
-$icon-font-size: 18px;
-$large-icon-font-size: 24px;
-
 .oc-react-tree li.chevron {
   span.rc-tree-switcher {
     background-image: none;
@@ -74,7 +71,7 @@ $large-icon-font-size: 24px;
   .rc-tree-switcher-noop,
   span.rc-tree-switcher_open,
   span.rc-tree-switcher_close {
-    font-size: $icon-font-size;
+    font-size: 18px;
     width: 12px;
     text-align: center;
     margin-top: 2px;
@@ -92,138 +89,13 @@ $large-icon-font-size: 24px;
   }
 }
 
-.rc-tree {
-  .rc-tree-treenode-disabled {
-    > span:not(.rc-tree-switcher) {
-      cursor: default;
-      color: inherit;
-    }
-  }
-}
+.oc-react-tree {
 
-.rc-tree {
-  $checkbox-width: 1.6rem;
-  padding: 0;
-
-  li {
-    &.rc-tree-treenode-checkbox-checked > span > span {
-      .tree-checkbox:before {
-        content: "\f00c"; // check
-      }
-    }
-
-    &.rc-tree-treenode-checkbox-indeterminate > span > span {
-      .tree-checkbox:before {
-        content: "\f068" // minus
-      }
-    }
-
-    .rc-tree-node-content-wrapper {
-      padding: 0;
-
-      &.draggable {
-        &:hover {
-          &:after {
-            font-family: "FontAwesome";
-            content: "\f07d"; // fa-arrows-v - vertical arrows
-            margin-left: 20px;
-            padding-right: 10px;
-            color: $oc-color-primary-azure;
-          }
-        }
-      }
-    }
-
-    &.drag-over {
-      > .draggable {
-        background: $oc-color-primary-orange;
-        border: none;
-      }
-    }
-
-    &.drag-over-gap-bottom {
-      > .draggable {
-        border-bottom: 2px solid $oc-color-primary-orange;
-      }
-    }
-
-    &.drag-over-gap-top {
-      > .draggable {
-        border-top: 2px solid $oc-color-primary-orange;
-      }
-    }
-  }
-
-  .tree-checkbox {
-    border: 1px solid $oc-color-gray;
-    height: $checkbox-width;
-    width: $checkbox-width;
-    cursor: pointer;
-    position: relative;
-    font-family: "FontAwesome";
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &.disabled {
-      background-color: $oc-color-select-hover;
-      cursor: default;
-    }
-  }
-
-  .rc-tree-node-selected {
-    background-color: transparent;
-    border: none;
-
-    .rc-tree-title {
-      border: none;
-      background-color: $oc-color-site-background;
-      opacity: 1;
-      display: inline-block;
-    }
-  }
-
-  > li:first-child {
-    margin-top: 0;
-  }
-
-  li {
-    margin: 3px 0;
-
-    span.rc-tree-checkbox {
-      display: none;
-    }
-  }
-
-  .rc-tree-title {
-    padding: 0 5px;
-  }
-
-  .rc-tree-iconEle.rc-tree-icon__customize {
-    cursor: default;
-  }
-}
-
-.title-container {
-  display: flex;
-  align-items: center;
-  height: 40px;
-
-  h2 {
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin: 0;
-  }
-
-  .header-right {
-    margin-left: auto;
-  }
 
   .ordering-arrows {
     > button {
       font-family: "FontAwesome";
-      font-size: $large-icon-font-size;
+      font-size: 24px;
       border: none;
       background: transparent;
       padding: 0 1px;
@@ -250,35 +122,167 @@ $large-icon-font-size: 24px;
     }
   }
 
-  .expand-all-toggle {
-    background: none;
-    border: none;
-    position: relative;
-    height: 20px;
-    width: 20px;
-    margin-left: 3px;
+  .oc-scrollbar-container {
+    border: 1px solid $oc-color-gray;
+    padding: 1rem;
+  }
 
-    &:focus {
-      box-shadow: none;
-    }
-
-    &:before {
-      position: absolute;
-      font-family: "FontAwesome";
-      font-size: $icon-font-size;
-      top: 0;
-      left: 0;
-    }
-
-    &.expand-all {
-      &:before {
-        content: "\f0d7"; // caret-down
-        left: -2px;
+  .rc-tree {
+    .rc-tree-treenode-disabled {
+      > span:not(.rc-tree-switcher) {
+        cursor: default;
+        color: inherit;
       }
     }
 
-    &:before {
-      content: "\f0da"; // caret-right
+    $checkbox-width: 1.6rem;
+    padding: 0;
+
+    li {
+      &.rc-tree-treenode-checkbox-checked > span > span {
+        .tree-checkbox:before {
+          content: "\f00c"; // check
+        }
+      }
+
+      &.rc-tree-treenode-checkbox-indeterminate > span > span {
+        .tree-checkbox:before {
+          content: "\f068" // minus
+        }
+      }
+
+      .rc-tree-node-content-wrapper {
+        padding: 0;
+
+        &.draggable {
+          &:hover {
+            &:after {
+              font-family: "FontAwesome";
+              content: "\f07d"; // fa-arrows-v - vertical arrows
+              margin-left: 20px;
+              padding-right: 10px;
+              color: $oc-color-primary-azure;
+            }
+          }
+        }
+      }
+
+      &.drag-over {
+        > .draggable {
+          background: $oc-color-primary-orange;
+          border: none;
+        }
+      }
+
+      &.drag-over-gap-bottom {
+        > .draggable {
+          border-bottom: 2px solid $oc-color-primary-orange;
+        }
+      }
+
+      &.drag-over-gap-top {
+        > .draggable {
+          border-top: 2px solid $oc-color-primary-orange;
+        }
+      }
+    }
+
+    .tree-checkbox {
+      border: 1px solid $oc-color-gray;
+      height: $checkbox-width;
+      width: $checkbox-width;
+      cursor: pointer;
+      position: relative;
+      font-family: "FontAwesome";
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.disabled {
+        background-color: $oc-color-select-hover;
+        cursor: default;
+      }
+    }
+
+    .rc-tree-node-selected {
+      background-color: transparent;
+      border: none;
+
+      .rc-tree-title {
+        border: none;
+        background-color: $oc-color-site-background;
+        opacity: 1;
+        display: inline-block;
+      }
+    }
+
+    > li:first-child {
+      margin-top: 0;
+    }
+
+    li {
+      margin: 3px 0;
+
+      span.rc-tree-checkbox {
+        display: none;
+      }
+    }
+
+    .rc-tree-title {
+      padding: 0 5px;
+    }
+
+    .rc-tree-iconEle.rc-tree-icon__customize {
+      cursor: default;
+    }
+  }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+    height: 40px;
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .header-right {
+      margin-left: auto;
+    }
+
+    .expand-all-toggle {
+      background: none;
+      border: none;
+      position: relative;
+      height: 20px;
+      width: 20px;
+      margin-left: 3px;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &:before {
+        position: absolute;
+        font-family: "FontAwesome";
+        font-size: 18px;
+        top: 0;
+        left: 0;
+      }
+
+      &.expand-all {
+        &:before {
+          content: "\f0d7"; // caret-down
+          left: -2px;
+        }
+      }
+
+      &:before {
+        content: "\f0da"; // caret-right
+      }
     }
   }
 }

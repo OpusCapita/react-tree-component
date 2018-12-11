@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
+import PerfectScrollBar from '@opuscapita/react-perfect-scrollbar';
 import 'rc-tree/assets/index.css';
 
 // Override defaults rc-tree styles
@@ -38,7 +39,6 @@ export default class OCTreeView extends React.PureComponent {
     showExpandAll: PropTypes.bool,
     title: PropTypes.string,
     headerRight: PropTypes.node,
-    showOrderingArrows: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -64,13 +64,12 @@ export default class OCTreeView extends React.PureComponent {
     treeData: [],
     checkedKeys: [],
     selectedKeys: [],
-    expandedKeys: undefined,
+    expandedKeys: [],
     className: '',
     deselectOnContainerClick: true,
     showExpandAll: false,
     title: undefined,
     headerRight: undefined,
-    showOrderingArrows: false,
   };
 
   constructor(props) {
@@ -91,13 +90,19 @@ export default class OCTreeView extends React.PureComponent {
     }
   }
 
-
   onContainerClick = (e) => {
     const { onSelect, deselectOnContainerClick } = this.props;
     // clicking outside item
     if (deselectOnContainerClick && e.target.tagName !== 'SPAN' && !this.header.contains(e.target)) {
       onSelect([]);
     }
+  };
+
+  onExpand = (expandedKeys) => {
+    const { onExpand } = this.props;
+    this.setState({ expandedKeys }, () => {
+      if (onExpand) onExpand(this.state.expandedKeys);
+    });
   };
 
   onDragDrop = (e) => {
@@ -125,7 +130,6 @@ export default class OCTreeView extends React.PureComponent {
     const parent = this.getTreeItem(id, treeData, true);
     return parent || treeData;
   };
-
 
   /**
    * Returns updated tree after Drag n' drop event
@@ -180,7 +184,6 @@ export default class OCTreeView extends React.PureComponent {
     if (!found) return false;
     return newItems;
   };
-
 
   /**
    * Returns a tree item by ID
@@ -348,28 +351,28 @@ export default class OCTreeView extends React.PureComponent {
           />}
           {headerRight && <div className="header-right">{headerRight}</div>}
         </header>}
-
         {!!nodes.length &&
-        <Tree
-          id={treeId}
-          className={className}
-          checkedKeys={checkedKeys}
-          selectedKeys={selectedKeys}
-          expandedKeys={this.state.expandedKeys}
-          onExpand={onExpand}
-          onSelect={onSelect}
-          onCheck={onCheck}
-          onDrop={this.onDragDrop}
-          checkable={checkable}
-          selectable={selectable}
-          draggable={draggable}
-          showLine={showLine}
-          showIcon={showIcon}
-          disabled={disabled}
-          title={title}
-        >
-          {nodes}
-        </Tree>
+        <PerfectScrollBar>
+          <Tree
+            id={treeId}
+            className={className}
+            checkedKeys={checkedKeys}
+            selectedKeys={selectedKeys}
+            expandedKeys={this.state.expandedKeys}
+            onExpand={this.onExpand}
+            onSelect={onSelect}
+            onCheck={onCheck}
+            onDrop={this.onDragDrop}
+            checkable={checkable}
+            selectable={selectable}
+            draggable={draggable}
+            showLine={showLine}
+            showIcon={showIcon}
+            disabled={disabled}
+          >
+            {nodes}
+          </Tree>
+        </PerfectScrollBar>
         }
       </div>
     );
