@@ -39,6 +39,7 @@ export default class OCTreeView extends React.PureComponent {
     showExpandAll: PropTypes.bool,
     title: PropTypes.string,
     headerRight: PropTypes.node,
+    showOrderingArrows: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -70,6 +71,7 @@ export default class OCTreeView extends React.PureComponent {
     showExpandAll: false,
     title: undefined,
     headerRight: undefined,
+    showOrderingArrows: false,
   };
 
   constructor(props) {
@@ -319,7 +321,7 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const {
-      treeId, className, checkedKeys, onExpand, onSelect, onCheck, showLine, showIcon,
+      treeId, className, checkedKeys, onSelect, onCheck, showLine, showIcon,
       checkable, selectable, draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
       showOrderingArrows, onOrderButtonClick,
     } = this.props;

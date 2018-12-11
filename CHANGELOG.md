@@ -2,6 +2,8 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+
+## 2.1.0
 * Arrows for reordering tree elements (`showOrderingArrows` and `onOrderButtonClick` props)
 * Added `@opuscapita/react-perfect-scrollbar` around tree
 * Made some changes on how nodes are expanded. Now it's not necessary to provide external `onExpand` callback in most of the cases.
