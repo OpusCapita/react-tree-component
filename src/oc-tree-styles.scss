@@ -13,6 +13,9 @@
 // chevron-up: "\f077"        ^
 // chevron-down: "\f078"      v
 
+$icon-font-size: 18px;
+$large-icon-font-size: 24px;
+
 .oc-react-tree li.chevron {
   span.rc-tree-switcher {
     background-image: none;
@@ -71,12 +74,13 @@
   .rc-tree-switcher-noop,
   span.rc-tree-switcher_open,
   span.rc-tree-switcher_close {
-    font-size: 18px;
+    font-size: $icon-font-size;
     width: 12px;
     text-align: center;
     margin-top: 2px;
     margin-right: 5px;
   }
+
   span.rc-tree-switcher_open:before {
     content: "\f0d7"; // caret-down
     font-family: "FontAwesome";
@@ -107,6 +111,7 @@
         content: "\f00c"; // check
       }
     }
+
     &.rc-tree-treenode-checkbox-indeterminate > span > span {
       .tree-checkbox:before {
         content: "\f068" // minus
@@ -115,6 +120,7 @@
 
     .rc-tree-node-content-wrapper {
       padding: 0;
+
       &.draggable {
         &:hover {
           &:after {
@@ -134,11 +140,13 @@
         border: none;
       }
     }
+
     &.drag-over-gap-bottom {
       > .draggable {
         border-bottom: 2px solid $oc-color-primary-orange;
       }
     }
+
     &.drag-over-gap-top {
       > .draggable {
         border-top: 2px solid $oc-color-primary-orange;
@@ -157,6 +165,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     &.disabled {
       background-color: $oc-color-select-hover;
       cursor: default;
@@ -166,6 +175,7 @@
   .rc-tree-node-selected {
     background-color: transparent;
     border: none;
+
     .rc-tree-title {
       border: none;
       background-color: $oc-color-site-background;
@@ -177,15 +187,19 @@
   > li:first-child {
     margin-top: 0;
   }
+
   li {
     margin: 3px 0;
+
     span.rc-tree-checkbox {
       display: none;
     }
   }
+
   .rc-tree-title {
     padding: 0 5px;
   }
+
   .rc-tree-iconEle.rc-tree-icon__customize {
     cursor: default;
   }
@@ -195,14 +209,47 @@
   display: flex;
   align-items: center;
   height: 40px;
+
   h2 {
     font-size: 1.6rem;
     font-weight: 400;
     margin: 0;
   }
+
   .header-right {
     margin-left: auto;
   }
+
+  .ordering-arrows {
+    > button {
+      font-family: "FontAwesome";
+      font-size: $large-icon-font-size;
+      border: none;
+      background: transparent;
+      padding: 0 1px;
+
+      &.up-arrow {
+        &:after {
+          content: "\f106"; // fa-angle-up
+        }
+      }
+
+      &.down-arrow {
+        &:after {
+          content: "\f107"; // fa-angle-down
+        }
+      }
+
+      &:disabled {
+        opacity: 0.3;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
   .expand-all-toggle {
     background: none;
     border: none;
@@ -210,13 +257,15 @@
     height: 20px;
     width: 20px;
     margin-left: 3px;
+
     &:focus {
       box-shadow: none;
     }
+
     &:before {
       position: absolute;
       font-family: "FontAwesome";
-      font-size: 18px;
+      font-size: $icon-font-size;
       top: 0;
       left: 0;
     }
@@ -227,6 +276,7 @@
         left: -2px;
       }
     }
+
     &:before {
       content: "\f0da"; // caret-right
     }

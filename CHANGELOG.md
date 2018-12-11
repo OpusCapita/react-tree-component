@@ -2,6 +2,7 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+* Arrows for reordering tree elements (`showOrderingArrows` and `onOrderButtonClick` props)
 
 ## 2.0.1
 * Hotfix: `expandedKeys` default value from `[]` to undefined.
