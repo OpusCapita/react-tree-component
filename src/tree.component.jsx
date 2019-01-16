@@ -76,8 +76,8 @@ export default class OCTreeView extends React.PureComponent {
 
   constructor(props) {
     super();
-    const expandedKeys = props.defaultExpandAll ?
-      this.getAllParentIds(props.treeData, props) : props.expandedKeys;
+    const expandedKeys = props.defaultExpandAll
+      ? this.getAllParentIds(props.treeData, props) : props.expandedKeys;
 
     this.state = {
       expandedKeys,
@@ -331,51 +331,59 @@ export default class OCTreeView extends React.PureComponent {
     return (
       // eslint-disable-next-line
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
-        {(showExpandAll || title || headerRight || showOrderingArrows) &&
-        <header
-          className="tree-header"
-          ref={(el) => {
-            this.header = el;
-          }}
-        >
-          <div className="header-left">
-            {showExpandAll && !!nodes.length &&
-            <button
-              onClick={this.onExpandAllClick}
-              className={`expand-all-toggle ${expandAllClsName}`}
-              type="button"
-            />}
-            {title && <h2>{title}</h2>}
-            {showOrderingArrows &&
-            <OrderingArrows
-              onOrderButtonClick={onOrderButtonClick}
-              selectedParent={this.getSelectedParent()}
-              {...this.props}
-            />}
-          </div>
-          {headerRight && <div className="header-right">{headerRight}</div>}
-        </header>}
-        <PerfectScrollBar>
-          {!!nodes.length &&
-          <Tree
-            id={treeId}
-            className={className}
-            checkedKeys={checkedKeys}
-            selectedKeys={selectedKeys}
-            expandedKeys={this.state.expandedKeys}
-            onExpand={this.onExpand}
-            onSelect={onSelect}
-            onCheck={onCheck}
-            onDrop={this.onDragDrop}
-            checkable={checkable}
-            selectable={selectable}
-            draggable={draggable}
-            showLine={showLine}
-            showIcon={showIcon}
-            disabled={disabled}
+        {(showExpandAll || title || headerRight || showOrderingArrows)
+        && (
+          <header
+            className="tree-header"
+            ref={(el) => {
+              this.header = el;
+            }}
           >
-            {nodes}
-          </Tree>
+            <div className="header-left">
+              {showExpandAll && !!nodes.length
+              && (
+                <button
+                  onClick={this.onExpandAllClick}
+                  className={`expand-all-toggle ${expandAllClsName}`}
+                  type="button"
+                />
+              )}
+              {title && <h2>{title}</h2>}
+              {showOrderingArrows
+              && (
+                <OrderingArrows
+                  onOrderButtonClick={onOrderButtonClick}
+                  selectedParent={this.getSelectedParent()}
+                  {...this.props}
+                />
+              )}
+            </div>
+            {headerRight && <div className="header-right">{headerRight}</div>}
+          </header>
+        )}
+        <PerfectScrollBar>
+          {!!nodes.length
+          && (
+            <Tree
+              id={treeId}
+              className={className}
+              checkedKeys={checkedKeys}
+              selectedKeys={selectedKeys}
+              expandedKeys={this.state.expandedKeys}
+              onExpand={this.onExpand}
+              onSelect={onSelect}
+              onCheck={onCheck}
+              onDrop={this.onDragDrop}
+              checkable={checkable}
+              selectable={selectable}
+              draggable={draggable}
+              showLine={showLine}
+              showIcon={showIcon}
+              disabled={disabled}
+            >
+              {nodes}
+            </Tree>
+          )
           }
         </PerfectScrollBar>
       </div>

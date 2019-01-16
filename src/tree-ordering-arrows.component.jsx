@@ -103,8 +103,8 @@ export default class OrderingArrows extends React.PureComponent {
     } = this.props;
     if (!selectedKeys.length) return true;
 
-    const parentArr = Array.isArray(selectedParent) ?
-      selectedParent : selectedParent[dataLookUpChildren];
+    const parentArr = Array.isArray(selectedParent)
+      ? selectedParent : selectedParent[dataLookUpChildren];
     const index = parentArr.findIndex(item => item[dataLookUpKey] === selectedKeys[0]);
 
     if (dir === 'up') return index === 0;
