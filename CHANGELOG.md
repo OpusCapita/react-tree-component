@@ -2,6 +2,7 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+* Bug and layout fixes
 
 ## 2.1.0
 * Arrows for reordering tree elements (`showOrderingArrows` and `onOrderButtonClick` props)

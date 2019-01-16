@@ -95,7 +95,7 @@ export default class OCTreeView extends React.PureComponent {
   onContainerClick = (e) => {
     const { onSelect, deselectOnContainerClick } = this.props;
     // clicking outside item
-    if (deselectOnContainerClick && e.target.tagName !== 'SPAN' && !this.header.contains(e.target)) {
+    if (deselectOnContainerClick && e.target.tagName !== 'SPAN' && !this.header.contains(e.target) && onSelect) {
       onSelect([]);
     }
   };
@@ -331,30 +331,32 @@ export default class OCTreeView extends React.PureComponent {
     return (
       // eslint-disable-next-line
       <div id="tree-view-container" className={clsName} onClick={this.onContainerClick}>
-
         {(showExpandAll || title || headerRight || showOrderingArrows) &&
         <header
-          className="title-container"
+          className="tree-header"
           ref={(el) => {
             this.header = el;
           }}
         >
-          {showExpandAll &&
-          <button
-            onClick={this.onExpandAllClick}
-            className={`expand-all-toggle ${expandAllClsName}`}
-          />}
-          {title && <h2>{title}</h2>}
-          {showOrderingArrows &&
-          <OrderingArrows
-            onOrderButtonClick={onOrderButtonClick}
-            selectedParent={this.getSelectedParent()}
-            {...this.props}
-          />}
+          <div className="header-left">
+            {showExpandAll && !!nodes.length &&
+            <button
+              onClick={this.onExpandAllClick}
+              className={`expand-all-toggle ${expandAllClsName}`}
+              type="button"
+            />}
+            {title && <h2>{title}</h2>}
+            {showOrderingArrows &&
+            <OrderingArrows
+              onOrderButtonClick={onOrderButtonClick}
+              selectedParent={this.getSelectedParent()}
+              {...this.props}
+            />}
+          </div>
           {headerRight && <div className="header-right">{headerRight}</div>}
         </header>}
-        {!!nodes.length &&
         <PerfectScrollBar>
+          {!!nodes.length &&
           <Tree
             id={treeId}
             className={className}
@@ -374,8 +376,8 @@ export default class OCTreeView extends React.PureComponent {
           >
             {nodes}
           </Tree>
+          }
         </PerfectScrollBar>
-        }
       </div>
     );
   }
