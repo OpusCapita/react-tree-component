@@ -2,6 +2,8 @@
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 ## <next>
+
+## 2.1.1
 * Bug and layout fixes
 
 ## 2.1.0

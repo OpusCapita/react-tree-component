@@ -74,8 +74,9 @@
     font-size: 18px;
     width: 12px;
     text-align: center;
-    margin-top: 2px;
     margin-right: 5px;
+    height: 17px;
+    line-height: 1;
   }
 
   span.rc-tree-switcher_open:before {
@@ -93,12 +94,15 @@
 
 
   .ordering-arrows {
+    margin-left: 2rem;
+
     > button {
       font-family: "FontAwesome";
-      font-size: 24px;
+      font-size: 32px;
       border: none;
       background: transparent;
       padding: 0 1px;
+      width: 30px;
 
       &.up-arrow {
         &:after {
@@ -123,7 +127,7 @@
   }
 
   .oc-scrollbar-container {
-    border: 1px solid $oc-color-gray;
+    border: 1px solid #a4afb6;
     padding: 1rem;
   }
 
@@ -238,7 +242,7 @@
     }
   }
 
-  .title-container {
+  .tree-header {
     display: flex;
     align-items: center;
     height: 40px;
@@ -249,11 +253,17 @@
       margin: 0;
     }
 
-    .header-right {
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-left + * {
       margin-left: auto;
     }
 
     .expand-all-toggle {
+      line-height: 1;
       background: none;
       border: none;
       position: relative;
