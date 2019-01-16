@@ -118,11 +118,13 @@ export default class OrderingArrows extends React.PureComponent {
           onClick={this.onUpClick}
           className="up-arrow "
           disabled={this.isArrowDisabled('up')}
+          type="button"
         />
         <button
           onClick={this.onDownClick}
           className="down-arrow"
           disabled={this.isArrowDisabled('down')}
+          type="button"
         />
       </div>
     );
