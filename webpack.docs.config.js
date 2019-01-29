@@ -106,6 +106,16 @@ const baseConfig = {
           'file-loader?name=[name].[ext]',
         ],
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        include: path.resolve(__dirname, 'src', 'assets'),
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+          },
+        }],
+      },
     ],
   },
   node: {

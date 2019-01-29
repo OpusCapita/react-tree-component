@@ -1,7 +1,9 @@
 # Changelog
 
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
+
 ## <next>
+* Remove base64 encoded images from the styles. Component should now be CSP-compliant.
 
 ## 2.1.1
 * Bug and layout fixes

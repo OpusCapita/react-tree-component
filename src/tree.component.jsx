@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
 import PerfectScrollBar from '@opuscapita/react-perfect-scrollbar';
-import 'rc-tree/assets/index.css';
 
-// Override defaults rc-tree styles
-import './oc-tree-styles.scss';
+// Load default styles and override them with rc-tree styles
+import './assets/rc-tree-styles.scss';
+import './assets/oc-tree-styles.scss';
 import TreeCheckbox from './tree-checkbox.component';
 import OrderingArrows from './tree-ordering-arrows.component';
 
@@ -95,7 +95,10 @@ export default class OCTreeView extends React.PureComponent {
   onContainerClick = (e) => {
     const { onSelect, deselectOnContainerClick } = this.props;
     // clicking outside item
-    if (deselectOnContainerClick && e.target.tagName !== 'SPAN' && !this.header.contains(e.target) && onSelect) {
+    if (deselectOnContainerClick &&
+      e.target.tagName !== 'SPAN' &&
+      (!this.header || (this.header && !this.header.contains(e.target))) &&
+      onSelect) {
       onSelect([]);
     }
   };
