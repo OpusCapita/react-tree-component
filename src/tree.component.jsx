@@ -299,7 +299,7 @@ export default class OCTreeView extends React.PureComponent {
               title={node[dataLookUpValue]}
               key={node[dataLookUpKey]}
               className={`${iconClass} leaf-node`}
-              icon={<TreeCheckbox disabled={disabled}/>}
+              icon={<TreeCheckbox disabled={disabled} />}
             />);
         } else {
           // Parent node
@@ -308,7 +308,7 @@ export default class OCTreeView extends React.PureComponent {
               title={node[dataLookUpValue]}
               key={node[dataLookUpKey]}
               className={`${iconClass} parent-node`}
-              icon={<TreeCheckbox disabled={disabled}/>}
+              icon={<TreeCheckbox disabled={disabled} />}
             >
               {mountNodes(node[dataLookUpChildren])}
             </TreeNode>);
