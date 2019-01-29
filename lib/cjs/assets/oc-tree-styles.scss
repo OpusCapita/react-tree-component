@@ -143,6 +143,18 @@
     padding: 0;
 
     li {
+      &:not(.chevron):not(.carets):not(.arrow) {
+        .rc-tree-switcher_open.rc-tree-switcher:before {
+          font-family: "FontAwesome";
+          content: "\f068"; // fa-minus
+        }
+
+        .rc-tree-switcher.rc-tree-switcher_close:before {
+          font-family: "FontAwesome";
+          content: "\f067"; // fa-plus
+        }
+      }
+
       &.rc-tree-treenode-checkbox-checked > span > span {
         .tree-checkbox:before {
           content: "\f00c"; // check

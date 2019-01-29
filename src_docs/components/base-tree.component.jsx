@@ -54,7 +54,8 @@ export default class BaseTree extends React.PureComponent {
   renderConfiguration = treeProps => (
     <pre className="example-config">
       <h4>Tree configuration</h4>
-      <code>{
+      <code>
+        {
         fromJS(treeProps).entrySeq().map(([key, value]) => (
           <div className="config-content" key={key}>
             <div className="property-key">{`${key}:`}</div>

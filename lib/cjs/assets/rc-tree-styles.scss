@@ -70,10 +70,6 @@
   border: 0 none;
   cursor: pointer;
   outline: none;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-image: url('icons.png');
 }
 
 .rc-tree li span.rc-tree-switcher.rc-tree-icon__customize,
@@ -83,9 +79,11 @@
 }
 
 .rc-tree li span.rc-tree-icon_loading {
-  margin-right: 2px;
-  vertical-align: top;
-  background: url(loading.gif) no-repeat scroll 0 0 transparent;
+  &:before {
+    content: '\f110'; // fa-spinner
+    font-family: "FontAwesome";
+    position: absolute;
+  }
 }
 
 .rc-tree li span.rc-tree-switcher.rc-tree-switcher-noop {
@@ -141,22 +139,6 @@
   border: 2px solid #fff;
   border-top: 0;
   border-left: 0;
-}
-
-.rc-tree:not(.rc-tree-show-line) .rc-tree-switcher-noop {
-  background: none;
-}
-
-.rc-tree.rc-tree-show-line li:not(:last-child) > ul {
-  background: url(line.gif) 0 0 repeat-y;
-}
-
-.rc-tree.rc-tree-show-line li:not(:last-child) > .rc-tree-switcher-noop {
-  background-position: -56px -18px;
-}
-
-.rc-tree.rc-tree-show-line li:last-child > .rc-tree-switcher-noop {
-  background-position: -56px -36px;
 }
 
 .rc-tree-child-tree {

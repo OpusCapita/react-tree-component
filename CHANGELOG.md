@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 2.2.0
 * Remove redundant `showLine` prop
 * Remove external images from styles and use FontAwesome library instead
 
