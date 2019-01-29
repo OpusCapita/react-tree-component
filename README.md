@@ -36,7 +36,6 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onDragDrop               | Function         |  () => {}                                | Fires when item is dragged and dropped   |
 | onOrderButtonClick       | Function         |  undefined                               | Fires when ordering arrows are clicked   |
 | isDragDropLegal          | Function         |  undefined                               | This callback is executed before completing drag n' drop action. Function should return a bool   |
-| showLine                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | showIcon                 | Boolean          |  false                                   | Whether show or hide node guide lines    |
 | checkable                | Boolean          |  false                                   | Whether show or hide checkboxes from tree|
 | selectable               | Boolean          |  false                                   | Whether item can be selected.            |
@@ -87,7 +86,6 @@ export default class TreeView extends React.Component {
     checkable: true,
     selectable: false,
     defaultExpandAll: false,
-    showLine: true,
     showIcon: false,
     dataLookUpKey: 'personId',
     dataLookUpValue: 'name',

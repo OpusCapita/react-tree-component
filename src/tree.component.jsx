@@ -20,7 +20,6 @@ export default class OCTreeView extends React.PureComponent {
     onDragDrop: PropTypes.func,
     onOrderButtonClick: PropTypes.func,
     isDragDropLegal: PropTypes.func,
-    showLine: PropTypes.bool,
     showIcon: PropTypes.bool,
     checkable: PropTypes.bool,
     selectable: PropTypes.bool,
@@ -51,7 +50,6 @@ export default class OCTreeView extends React.PureComponent {
     onDragDrop: undefined,
     onOrderButtonClick: undefined,
     isDragDropLegal: undefined,
-    showLine: false,
     disabled: false,
     showIcon: true,
     checkable: false,
@@ -324,9 +322,9 @@ export default class OCTreeView extends React.PureComponent {
   render() {
     const nodes = this.renderNodes();
     const {
-      treeId, className, checkedKeys, onSelect, onCheck, showLine, showIcon,
-      checkable, selectable, draggable, disabled, selectedKeys, showExpandAll, title, headerRight,
-      showOrderingArrows, onOrderButtonClick,
+      treeId, className, checkedKeys, onSelect, onCheck, showIcon, checkable, selectable,
+      draggable, disabled, selectedKeys, showExpandAll, title, headerRight, showOrderingArrows,
+      onOrderButtonClick,
     } = this.props;
     const clsName = className ? `${className} oc-react-tree` : 'oc-react-tree';
     const expandAllClsName = this.isAllExpanded() ? 'expand-all' : '';
@@ -380,7 +378,7 @@ export default class OCTreeView extends React.PureComponent {
               checkable={checkable}
               selectable={selectable}
               draggable={draggable}
-              showLine={showLine}
+              showLine={false}
               showIcon={showIcon}
               disabled={disabled}
             >
