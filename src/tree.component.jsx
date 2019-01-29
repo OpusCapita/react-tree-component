@@ -95,10 +95,10 @@ export default class OCTreeView extends React.PureComponent {
   onContainerClick = (e) => {
     const { onSelect, deselectOnContainerClick } = this.props;
     // clicking outside item
-    if (deselectOnContainerClick &&
-      e.target.tagName !== 'SPAN' &&
-      (!this.header || (this.header && !this.header.contains(e.target))) &&
-      onSelect) {
+    if (deselectOnContainerClick
+      && e.target.tagName !== 'SPAN'
+      && (!this.header || (this.header && !this.header.contains(e.target)))
+      && onSelect) {
       onSelect([]);
     }
   };
@@ -235,8 +235,7 @@ export default class OCTreeView extends React.PureComponent {
    * Checks whether or not all parent IDs are expanded
    * @returns {boolean}
    */
-  isAllExpanded = () =>
-    this.state.expandedKeys && this.state.expandedKeys.length === this.getAllParentIds().length;
+  isAllExpanded = () => this.state.expandedKeys && this.state.expandedKeys.length === this.getAllParentIds().length;
 
 
   /**
@@ -300,7 +299,8 @@ export default class OCTreeView extends React.PureComponent {
               key={node[dataLookUpKey]}
               className={`${iconClass} leaf-node`}
               icon={<TreeCheckbox disabled={disabled} />}
-            />);
+            />,
+          );
         } else {
           // Parent node
           list.push( // eslint-disable-line function-paren-newline
@@ -311,7 +311,8 @@ export default class OCTreeView extends React.PureComponent {
               icon={<TreeCheckbox disabled={disabled} />}
             >
               {mountNodes(node[dataLookUpChildren])}
-            </TreeNode>);
+            </TreeNode>,
+          );
         }
         return false;
       });
