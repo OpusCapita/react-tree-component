@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Remove redundant `showLine` prop
+* Remove external images from styles and use FontAwesome library instead
 
 ## 2.1.2
 * Remove base64 encoded images from the styles. Component should now be CSP-compliant.
