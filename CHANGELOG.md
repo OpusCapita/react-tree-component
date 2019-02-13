@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 2.3.0
 * `handleExpandedKeysManually` and `defaultExpandAll` props
 
 ## 2.2.0
