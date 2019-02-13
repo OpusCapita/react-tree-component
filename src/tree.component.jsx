@@ -34,6 +34,8 @@ export default class OCTreeView extends React.PureComponent {
     checkedKeys: PropTypes.arrayOf(PropTypes.string),
     selectedKeys: PropTypes.arrayOf(PropTypes.string),
     expandedKeys: PropTypes.arrayOf(PropTypes.string),
+    handleExpandedKeysManually: PropTypes.bool,
+    defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
     deselectOnContainerClick: PropTypes.bool,
     showExpandAll: PropTypes.bool,
     title: PropTypes.string,
@@ -64,12 +66,14 @@ export default class OCTreeView extends React.PureComponent {
     checkedKeys: [],
     selectedKeys: [],
     expandedKeys: [],
+    defaultExpandedKeys: [],
     className: '',
     deselectOnContainerClick: true,
     showExpandAll: false,
     title: undefined,
     headerRight: undefined,
     showOrderingArrows: false,
+    handleExpandedKeysManually: false,
   };
 
   constructor(props) {
@@ -83,7 +87,8 @@ export default class OCTreeView extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.expandedKeys !== this.props.expandedKeys) {
+    if (nextProps.handleExpandedKeysManually &&
+      (nextProps.expandedKeys !== this.props.expandedKeys)) {
       this.setState({
         expandedKeys: nextProps.expandedKeys,
       });
@@ -102,7 +107,8 @@ export default class OCTreeView extends React.PureComponent {
   };
 
   onExpand = (expandedKeys) => {
-    const { onExpand } = this.props;
+    const { onExpand, handleExpandedKeysManually } = this.props;
+    if (!handleExpandedKeysManually) return;
     this.setState({ expandedKeys }, () => {
       if (onExpand) onExpand(this.state.expandedKeys);
     });
@@ -321,13 +327,18 @@ export default class OCTreeView extends React.PureComponent {
 
   render() {
     const nodes = this.renderNodes();
+    const resolvedProps = {};
     const {
       treeId, className, checkedKeys, onSelect, onCheck, showIcon, checkable, selectable,
       draggable, disabled, selectedKeys, showExpandAll, title, headerRight, showOrderingArrows,
-      onOrderButtonClick,
+      onOrderButtonClick, defaultExpandedKeys, handleExpandedKeysManually,
     } = this.props;
     const clsName = className ? `${className} oc-react-tree` : 'oc-react-tree';
     const expandAllClsName = this.isAllExpanded() ? 'expand-all' : '';
+
+    // We don't pass expandedKeys to rc-tree unless we want to handle expandedKeys
+    // by ourselves
+    if (handleExpandedKeysManually) resolvedProps.expandedKeys = this.state.expandedKeys;
 
     return (
       // eslint-disable-next-line
@@ -370,7 +381,7 @@ export default class OCTreeView extends React.PureComponent {
               className={className}
               checkedKeys={checkedKeys}
               selectedKeys={selectedKeys}
-              expandedKeys={this.state.expandedKeys}
+              defaultExpandedKeys={defaultExpandedKeys}
               onExpand={this.onExpand}
               onSelect={onSelect}
               onCheck={onCheck}
@@ -381,6 +392,7 @@ export default class OCTreeView extends React.PureComponent {
               showLine={false}
               showIcon={showIcon}
               disabled={disabled}
+              {...resolvedProps}
             >
               {nodes}
             </Tree>
