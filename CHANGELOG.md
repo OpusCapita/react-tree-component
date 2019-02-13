@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* `handleExpandedKeysManually` and `defaultExpandAll` props
 
 ## 2.2.0
 * Remove redundant `showLine` prop
