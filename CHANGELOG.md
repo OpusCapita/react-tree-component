@@ -3,6 +3,9 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Changed selected background color, area and opacity
+* Added hover background
+* Increased padding between lines
 
 ## 2.3.0
 * `handleExpandedKeysManually` and `defaultExpandAll` props
