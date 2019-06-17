@@ -92,7 +92,6 @@
 
 .oc-react-tree {
 
-
   .ordering-arrows {
     margin-left: 2rem;
 
@@ -201,6 +200,33 @@
           border-top: 2px solid $oc-color-primary-orange;
         }
       }
+
+      &.parent-node > span {
+        height: 100%;
+        &.rc-tree-switcher {
+          float: left;
+        }
+        &.rc-tree-node-content-wrapper {
+          width: auto;
+          display: block;
+        }
+      }
+
+      &.parent-node > span,
+      &.leaf-node {
+        padding: 5px 0;
+      }
+
+      &.parent-node > span.rc-tree-node-content-wrapper,
+      &.leaf-node {
+        &:hover {
+          background: $oc-color-select-hover;
+        }
+      }
+      &.parent-node > span.rc-tree-node-content-wrapper.rc-tree-treenode-selected,
+      &.leaf-node.rc-tree-treenode-selected {
+        background: $oc-color-select-selected;
+      }
     }
 
     .tree-checkbox {
@@ -224,11 +250,10 @@
     .rc-tree-node-selected {
       background-color: transparent;
       border: none;
+      opacity: 1;
 
       .rc-tree-title {
         border: none;
-        background-color: $oc-color-site-background;
-        opacity: 1;
         display: inline-block;
       }
     }
@@ -238,7 +263,7 @@
     }
 
     li {
-      margin: 3px 0;
+      margin: 0;
 
       span.rc-tree-checkbox {
         display: none;

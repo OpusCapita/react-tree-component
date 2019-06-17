@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+# 2.3.1
 * Changed selected background color, area and opacity
 * Added hover background
 * Increased padding between lines
