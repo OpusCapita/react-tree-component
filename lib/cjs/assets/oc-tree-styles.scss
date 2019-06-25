@@ -223,7 +223,7 @@
           background: $oc-color-select-hover;
         }
       }
-      &.parent-node > span.rc-tree-node-content-wrapper.rc-tree-treenode-selected,
+      &.parent-node > span.rc-tree-node-content-wrapper.rc-tree-node-selected,
       &.leaf-node.rc-tree-treenode-selected {
         background: $oc-color-select-selected;
       }
@@ -264,6 +264,7 @@
 
     li {
       margin: 0;
+      clear: both;
 
       span.rc-tree-checkbox {
         display: none;
