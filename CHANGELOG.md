@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed selected parent node background color
+* Fixed Internet Explorer specific float left issues
 
 # 2.3.1
 * Changed selected background color, area and opacity
