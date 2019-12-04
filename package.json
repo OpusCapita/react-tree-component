@@ -102,7 +102,7 @@
   "dependencies": {
     "@opuscapita/oc-cm-common-styles": "2.2.0",
     "@opuscapita/react-perfect-scrollbar": "3.0.4",
-    "rc-tree": "1.14.8"
+    "rc-tree": "2.1.0"
   },
   "repository": {
     "type": "git",

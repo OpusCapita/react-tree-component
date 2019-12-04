@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 2.3.3
+* Fixed title width
+
 ## 2.3.2
 * Fixed selected parent node background color
 * Fixed Internet Explorer specific float left issues
