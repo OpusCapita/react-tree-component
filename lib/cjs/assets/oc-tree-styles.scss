@@ -168,7 +168,7 @@
 
       .rc-tree-node-content-wrapper {
         padding: 0;
-        width: 100%;
+        width: calc(100% - 18px);
 
         &.draggable {
           &:hover {
