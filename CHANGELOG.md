@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 2.3.4
+* Fixed horizontal scrollbar
+
 ## 2.3.3
 * Fixed title width
 
