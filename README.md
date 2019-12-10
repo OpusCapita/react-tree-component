@@ -47,6 +47,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | treeData                   | Array            | []                                       | Array of node objects.                   |
 | dataLookUpKey              | String           | 'key'                                    | Unique identifier of data item.          |
 | dataLookUpValue            | String           | 'parent'                                 | Representative value of data item.       |
+| dataLookUpLeafValue        | String           | undefined                                | Representative value of leaf data item (if differs from dataLookUpValue). |
 | dataLookUpChildren         | String           | 'children'                               | Data item property to identifiy subitems |
 | checkedKeys                | Array            | []                                       | Array of checked items (ids) |
 | expandedKeys               | Array            | []                                       | Array of expanded items (ids) |
