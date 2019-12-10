@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 2.3.5
 * Added `dataLookUpLeafValue` prop
 
 ## 2.3.4
