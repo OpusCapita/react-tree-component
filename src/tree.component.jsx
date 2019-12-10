@@ -300,7 +300,7 @@ export default class OCTreeView extends React.PureComponent {
         if (!node[dataLookUpKey]) return false;
         // Leaf node
         if (!checkChildren(node)) {
-          const title = dataLookUpLeafValue ? node[dataLookUpLeafValue] : node[dataLookUpValue];
+          const title = node[dataLookUpLeafValue] || node[dataLookUpValue];
           list.push( // eslint-disable-line function-paren-newline
             <TreeNode
               title={title}
