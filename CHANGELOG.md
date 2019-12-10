@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added `dataLookUpLeafValue` prop
 
 ## 2.3.4
 * Fixed horizontal scrollbar

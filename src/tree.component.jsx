@@ -30,6 +30,7 @@ export default class OCTreeView extends React.PureComponent {
     treeData: PropTypes.arrayOf(PropTypes.object),
     dataLookUpKey: PropTypes.string,
     dataLookUpValue: PropTypes.string,
+    dataLookUpLeafValue: PropTypes.string,
     dataLookUpChildren: PropTypes.string,
     checkedKeys: PropTypes.arrayOf(PropTypes.string),
     selectedKeys: PropTypes.arrayOf(PropTypes.string),
@@ -61,6 +62,7 @@ export default class OCTreeView extends React.PureComponent {
     // Customs
     dataLookUpKey: 'key',
     dataLookUpValue: 'parent',
+    dataLookUpLeafValue: undefined,
     dataLookUpChildren: 'children',
     treeData: [],
     checkedKeys: [],
@@ -287,7 +289,7 @@ export default class OCTreeView extends React.PureComponent {
   /* renderNodes - function */
   renderNodes() {
     const {
-      dataLookUpKey, dataLookUpValue, dataLookUpChildren, iconClass, disabled,
+      dataLookUpKey, dataLookUpValue, dataLookUpLeafValue, dataLookUpChildren, iconClass, disabled,
     } = this.props;
     const checkChildren = this.hasChildren;
 
@@ -298,9 +300,10 @@ export default class OCTreeView extends React.PureComponent {
         if (!node[dataLookUpKey]) return false;
         // Leaf node
         if (!checkChildren(node)) {
+          const title = node[dataLookUpLeafValue] || node[dataLookUpValue];
           list.push( // eslint-disable-line function-paren-newline
             <TreeNode
-              title={node[dataLookUpValue]}
+              title={title}
               key={node[dataLookUpKey]}
               className={`${iconClass} leaf-node`}
               icon={<TreeCheckbox disabled={disabled} />}
